@@ -5,8 +5,10 @@
         "mobile": "0000000000",
         "message": "Testing retry logic",
         "timestamp": "2026-06-26T12:00:00.000000",
-        "processed": false,
+        "processed": true,
         "retry_count": 2,
-        "sms_sent": true
+        "sms_sent": true,
+        "admin_email_sent": true,
+        "user_email_sent": true
     }
 ]

@@ -1,0 +1,2334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MFD-Dost | Investor Education Content for Mutual Fund Distributors</title>
+  <meta name="description" content="MFD-Dost helps Mutual Fund Distributors create consistent, educational content for social media and investor communication. NISM Certified. Built for MFDs." />
+  <meta name="keywords" content="MFD content, mutual fund distributor content, investor education, IFA content, financial content creation, SIP awareness content" />
+  <meta property="og:title" content="MFD-Dost | Investor Education Content for MFDs" />
+  <meta property="og:description" content="Helping Mutual Fund Distributors maintain a professional digital presence through educational content and investor awareness communication." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://mfddost.com" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            navy: '#0F172A',
+            'navy-800': '#1E293B',
+            'navy-700': '#334155',
+            blue: { DEFAULT: '#2563EB', light: '#3B82F6', dark: '#1D4ED8' },
+            emerald: { DEFAULT: '#10B981', light: '#34D399', dark: '#059669' },
+          },
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            body: ['Instrument Sans', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-primary: #F8FAFC; /* Slate 50 */
+      --bg-secondary: #FFFFFF;
+      --text-primary: #0F172A; /* Slate 900 */
+      --text-secondary: #1E293B; /* Slate 800 for high crisp contrast in light mode */
+      --text-muted: #475569; /* Slate 600 */
+      --border-color: rgba(15, 23, 42, 0.05);
+      --glass-bg: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(15, 23, 42, 0.06);
+      --card-shadow: 0 10px 25px -5px rgba(148, 163, 184, 0.12), 0 8px 10px -6px rgba(148, 163, 184, 0.12);
+      --blue: #2563EB;
+      --blue-light: #3B82F6;
+      --emerald: #10B981;
+      --emerald-light: #34D399;
+      --input-bg: #FFFFFF;
+      --input-border: #E2E8F0;
+    }
+
+    .dark {
+      --bg-primary: #0F172A; /* Navy */
+      --bg-secondary: #1E293B; /* Navy 800 */
+      --text-primary: #F8FAFC; /* Slate 50 */
+      --text-secondary: #E2E8F0; /* Slate 200 for excellent dark mode readability */
+      --text-muted: #94A3B8; /* Slate 400 */
+      --border-color: rgba(255, 255, 255, 0.08);
+      --glass-bg: rgba(30, 41, 59, 0.6);
+      --glass-border: rgba(255, 255, 255, 0.07);
+      --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+      --input-bg: rgba(30, 41, 59, 0.6);
+      --input-border: rgba(255, 255, 255, 0.1);
+    }
+
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      font-size: 20px; /* Scaled root size up to 20px to make all fonts proportionally larger */
+    }
+
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-secondary);
+      overflow-x: hidden;
+      letter-spacing: 0.01em;
+      text-rendering: optimizeLegibility;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    h1, h2, h3, h4, h5, .font-display {
+      font-family: 'Syne', sans-serif;
+      color: var(--text-primary);
+      letter-spacing: -0.015em; /* Tighter tracking for modern display look */
+      transition: color 0.3s ease;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.12;
+      transition: opacity 0.3s ease;
+    }
+    .dark body::before {
+      opacity: 0.35;
+    }
+
+    /* ── GRADIENT MESH BG ── */
+    .mesh-bg {
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(37,99,235,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 90%, rgba(16,185,129,0.04) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 60% 30%, rgba(37,99,235,0.03) 0%, transparent 50%),
+        var(--bg-primary);
+      transition: background 0.3s ease;
+    }
+    .dark .mesh-bg {
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(37,99,235,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 90%, rgba(16,185,129,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 60% 30%, rgba(37,99,235,0.08) 0%, transparent 50%),
+        var(--bg-primary);
+    }
+
+    /* ── GLASS CARDS ── */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--card-shadow);
+      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .glass-light {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--card-shadow);
+      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* ── GRADIENT TEXT ── */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 50%, var(--emerald) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .gradient-text-blue {
+      background: linear-gradient(135deg, var(--blue-light) 0%, var(--blue) 60%, var(--emerald) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── GLOWING BTN ── */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), var(--blue-light));
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.2);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 1.5px solid var(--border-color);
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+    }
+    .btn-secondary:hover {
+      background: rgba(15, 23, 42, 0.04);
+      border-color: var(--text-primary);
+      transform: translateY(-2px);
+    }
+    .dark .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255,255,255,0.35);
+    }
+    .btn-emerald {
+      background: linear-gradient(135deg, var(--emerald), var(--emerald-light));
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.2);
+      transition: all 0.3s ease;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+    }
+    .btn-emerald:hover {
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+      transform: translateY(-2px);
+    }
+
+    /* ── NAV ── */
+    #navbar {
+      transition: all 0.4s ease;
+    }
+    #navbar.scrolled {
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--card-shadow);
+    }
+    .nav-link {
+      font-family: 'Syne', sans-serif;
+      font-weight: 500;
+      font-size: 0.875rem;
+      letter-spacing: 0.02em;
+      color: var(--text-secondary);
+      transition: color 0.2s ease;
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--emerald);
+      transition: width 0.25s ease;
+    }
+    .nav-link:hover { color: var(--text-primary); }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ── MOBILE MENU ── */
+    #mobile-menu {
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateY(-8px);
+      opacity: 0;
+      pointer-events: none;
+    }
+    #mobile-menu.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* ── SECTION DIVIDER ── */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(37,99,235,0.12), rgba(16,185,129,0.12), transparent);
+    }
+
+    /* ── FEATURE CARDS ── */
+    .feature-card {
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(37,99,235,0.04) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .dark .feature-card::before {
+      background: linear-gradient(135deg, rgba(37,99,235,0.08) 0%, transparent 60%);
+    }
+    .feature-card:hover { transform: translateY(-6px); border-color: rgba(37,99,235,0.2) !important; }
+    .feature-card:hover::before { opacity: 1; }
+
+    .service-card {
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--emerald));
+      transform: scaleX(0);
+      transition: transform 0.35s ease;
+    }
+    .service-card:hover { transform: translateY(-5px); }
+    .service-card:hover::after { transform: scaleX(1); }
+
+    /* ── DASHBOARD ILLUSTRATION ── */
+    .dash-card {
+      animation: floatUp 4s ease-in-out infinite;
+    }
+    .dash-card:nth-child(2) { animation-delay: -1.5s; }
+    .dash-card:nth-child(3) { animation-delay: -2.8s; }
+
+    @keyframes floatUp {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ── TIMELINE ── */
+    .timeline-line {
+      background: linear-gradient(180deg, transparent, var(--blue), var(--emerald), transparent);
+    }
+    .timeline-dot {
+      background: linear-gradient(135deg, var(--blue), var(--emerald));
+      box-shadow: 0 0 16px rgba(37,99,235,0.3);
+    }
+    .timeline-item {
+      transition: all 0.3s ease;
+    }
+    .timeline-item:hover .timeline-dot {
+      box-shadow: 0 0 24px rgba(16,185,129,0.45);
+      transform: scale(1.15);
+    }
+
+    /* ── CERT CARDS ── */
+    .cert-card {
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .cert-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--emerald));
+    }
+    .cert-card:hover { transform: translateY(-4px); }
+
+    /* ── GLOW PULSE ── */
+    .glow-pulse {
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 15px rgba(37,99,235,0.12); }
+      50% { box-shadow: 0 0 30px rgba(16,185,129,0.18); }
+    }
+
+    /* ── FORM ── */
+    .form-input {
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      color: var(--text-primary);
+      transition: all 0.25s ease;
+      font-family: 'Instrument Sans', sans-serif;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--blue);
+      background: var(--bg-secondary);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+    }
+    .form-input::placeholder { color: var(--text-muted); }
+
+    /* ── TRUST BADGE ── */
+    .trust-badge {
+      background: rgba(16,185,129,0.08);
+      border: 1px solid rgba(16,185,129,0.18);
+      color: var(--emerald);
+    }
+    .dark .trust-badge {
+      background: rgba(16,185,129,0.15);
+      border: 1px solid rgba(16,185,129,0.3);
+      color: #34D399;
+    }
+
+    /* ── SCROLL & HOVER INDICATORS ── */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+    .bounce { animation: bounce 2s ease-in-out infinite; }
+
+    @keyframes bounceHorizontal {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(4px); }
+    }
+    .animate-bounce-horizontal {
+      animation: bounceHorizontal 1.2s ease-in-out infinite;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--emerald);
+    }
+
+    /* ── ICON WRAPPER ── */
+    .icon-wrap {
+      background: linear-gradient(135deg, rgba(37,99,235,0.08), rgba(16,185,129,0.04));
+      border: 1px solid rgba(37,99,235,0.12);
+      transition: all 0.3s ease;
+    }
+    .icon-wrap:hover, .feature-card:hover .icon-wrap, .service-card:hover .icon-wrap {
+      background: linear-gradient(135deg, rgba(37,99,235,0.18), rgba(16,185,129,0.1));
+      border-color: rgba(37,99,235,0.3);
+      transform: scale(1.08);
+    }
+
+    /* ── QUOTE MARK ── */
+    .quote-mark {
+      font-family: 'Syne', sans-serif;
+      font-size: 5rem;
+      line-height: 1;
+      color: rgba(37,99,235,0.15);
+    }
+
+    /* ── FOOTER ── */
+    footer a { transition: color 0.2s ease; }
+    footer a:hover { color: var(--emerald-light); }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 3px; opacity: 0.5; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+
+    /* ── PROGRESS BAR ── */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2.5px;
+      background: linear-gradient(90deg, var(--blue), var(--emerald));
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* ── HERO GRID BG ── */
+    .hero-grid {
+      background-image:
+        linear-gradient(var(--border-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* ── Responsive text adjustments ── */
+    @media (max-width: 640px) {
+      .hero-headline { font-size: 2.2rem; line-height: 1.15; }
+    }
+
+    /* ── SPA SECTION VIEW ── */
+    .spa-section {
+      animation: fadeInSection 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes fadeInSection {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="mesh-bg">
+
+  <!-- PROGRESS BAR -->
+  <div id="progress-bar" style="width:0%"></div>
+
+  <!-- ════════════════════════════════ NAVIGATION ════════════════════════════════ -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-4 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+
+      <!-- Logo -->
+      <a href="#home" onclick="navigateToSection('home'); return false;" class="flex items-center group">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 155 38" width="155" height="33" role="img" aria-label="MFD-Dost">
+          <defs>
+            <linearGradient id="navGD" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#2563EB"/>
+              <stop offset="100%" stop-color="#10B981"/>
+            </linearGradient>
+            <linearGradient id="navGB" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#2563EB"/>
+              <stop offset="100%" stop-color="#10B981"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="64" height="33" rx="7" fill="#0F172A"/>
+          <text x="32" y="23" text-anchor="middle" font-family="'Helvetica Neue',Arial,sans-serif" font-size="20" font-weight="900" letter-spacing="-0.5" fill="white">MFD</text>
+          <!-- dash separate, small gap before Dost -->
+          <text x="66" y="23" font-family="'Helvetica Neue',Arial,sans-serif" font-size="22" font-weight="700" fill="url(#navGD)">-</text>
+          <text x="78" y="23" font-family="'Helvetica Neue',Arial,sans-serif" font-size="24" font-weight="900" letter-spacing="-0.5" fill="url(#navGD)">Dost</text>
+          <rect x="0" y="35" width="155" height="2.5" rx="1.25" fill="url(#navGB)"/>
+        </svg>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-8">
+        <a href="#home" onclick="navigateToSection('home'); return false;" class="nav-link whitespace-nowrap" id="nav-home">Home</a>
+        <a href="#why" onclick="navigateToSection('why'); return false;" class="nav-link whitespace-nowrap" id="nav-why">Why It Matters</a>
+        <a href="#services" onclick="navigateToSection('services'); return false;" class="nav-link whitespace-nowrap" id="nav-services">Services</a>
+        <a href="#gallery" onclick="navigateToSection('gallery'); return false;" class="nav-link whitespace-nowrap" id="nav-gallery">Gallery</a>
+        <a href="#calculator" onclick="navigateToSection('calculator'); return false;" class="nav-link whitespace-nowrap" id="nav-calculator">SIP Calculator</a>
+        <a href="#process" onclick="navigateToSection('process'); return false;" class="nav-link whitespace-nowrap" id="nav-process">Process</a>
+        <a href="#about" onclick="navigateToSection('about'); return false;" class="nav-link whitespace-nowrap" id="nav-about">About</a>
+        <a href="#contact" onclick="navigateToSection('contact'); return false;" class="nav-link whitespace-nowrap" id="nav-contact">Contact</a>
+      </div>
+
+      <!-- CTA + Theme Switcher + Hamburger -->
+      <div class="flex items-center gap-3">
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" aria-label="Toggle theme" class="w-10 h-10 flex items-center justify-center glass rounded-xl text-slate-700 dark:text-slate-300 hover:text-blue transition-all duration-300">
+          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707-.707m0-12.728l.707.707m12.728 12.728l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
+          </svg>
+        </button>
+        <a href="#contact" onclick="navigateToSection('contact'); return false;" class="hidden md:inline-flex items-center gap-2 btn-primary text-white text-sm px-5 py-2.5 rounded-xl">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book Free Consultation
+        </a>
+        <button id="hamburger" aria-label="Toggle mobile menu" class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 glass rounded-xl">
+          <span class="ham-line block w-5 h-0.5 bg-slate-700 dark:bg-slate-300 transition-all duration-300"></span>
+          <span class="ham-line block w-5 h-0.5 bg-slate-700 dark:bg-slate-300 transition-all duration-300"></span>
+          <span class="ham-line block w-3 h-0.5 bg-slate-700 dark:bg-slate-300 transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden mt-3 mx-0">
+      <div class="glass rounded-2xl p-5 flex flex-col gap-4">
+        <a href="#home" class="nav-link text-base block whitespace-nowrap" onclick="navigateToSection('home'); closeMobileMenu(); return false;">Home</a>
+        <a href="#why" class="nav-link text-base block whitespace-nowrap" onclick="navigateToSection('why'); closeMobileMenu(); return false;">Why It Matters</a>
+        <a href="#services" class="nav-link text-base block whitespace-nowrap" onclick="navigateToSection('services'); closeMobileMenu(); return false;">Services</a>
+        <a href="#gallery" class="nav-link text-base block whitespace-nowrap" onclick="navigateToSection('gallery'); closeMobileMenu(); return false;">Gallery</a>
+        <a href="#calculator" class="nav-link text-base block whitespace-nowrap" onclick="navigateToSection('calculator'); closeMobileMenu(); return false;">SIP Calculator</a>
+        <a href="#process" class="nav-link text-base block whitespace-nowrap" onclick="navigateToSection('process'); closeMobileMenu(); return false;">Process</a>
+        <a href="#about" class="nav-link text-base block whitespace-nowrap" onclick="navigateToSection('about'); closeMobileMenu(); return false;">About</a>
+        <a href="#contact" class="nav-link text-base block whitespace-nowrap" onclick="navigateToSection('contact'); closeMobileMenu(); return false;">Contact</a>
+        <a href="#contact" onclick="navigateToSection('contact'); closeMobileMenu(); return false;" class="btn-primary text-white text-sm px-5 py-3 rounded-xl text-center mt-1 flex items-center justify-center gap-2">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book Free Consultation
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════ HERO ════════════════════════════════ -->
+  <section id="home" class="spa-section relative min-h-screen flex items-center pt-24 pb-16 hero-grid overflow-hidden">
+
+    <!-- BG glow blobs -->
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-10 blur-3xl" style="background:radial-gradient(circle, #2563EB, transparent)"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full opacity-8 blur-3xl" style="background:radial-gradient(circle, #10B981, transparent)"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 w-full">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+        <!-- LEFT -->
+        <div class="relative z-10">
+          <div class="inline-flex items-center gap-2 trust-badge rounded-full px-4 py-2 text-xs font-display font-600 mb-6" data-aos="fade-down" data-aos-duration="600">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald animate-pulse"></span>
+            Premium Content Service for MFDs & IFAs
+          </div>
+
+          <h1 class="hero-headline font-display font-800 text-4xl lg:text-5xl xl:text-6xl leading-tight mb-6 text-slate-900 dark:text-white" data-aos="fade-up" data-aos-duration="700" data-aos-delay="100">
+            Grow Your MFD Practice With<br/>
+            <span class="relative inline-block mt-2">
+              <span class="absolute inset-0 bg-blue/10 dark:bg-blue/20 rounded-2xl transform -skew-x-6 -rotate-1 border border-blue/10 dark:border-blue/30"></span>
+              <span class="relative gradient-text-blue px-4 py-1 inline-block">Consistent Content</span>
+            </span>
+          </h1>
+
+          <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-6 max-w-lg" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
+            Educate investors, build digital authority, and stay top-of-mind with high-quality posts, video scripts, and client broadcast templates.
+          </p>
+
+          <!-- Key highlights checklist -->
+          <div class="space-y-2.5 mb-8 text-sm text-slate-600 dark:text-slate-400" data-aos="fade-up" data-aos-duration="700" data-aos-delay="300">
+            <div class="flex items-center gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-emerald/10 dark:bg-emerald/20 text-emerald flex items-center justify-center text-xs font-bold">✓</span>
+              <span><strong>Ready-to-Use Templates</strong> — Zero design skills required</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-emerald/10 dark:bg-emerald/20 text-emerald flex items-center justify-center text-xs font-bold">✓</span>
+              <span><strong>Education-First</strong> — 100% compliance-friendly themes</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-emerald/10 dark:bg-emerald/20 text-emerald flex items-center justify-center text-xs font-bold">✓</span>
+              <span><strong>Multi-Channel</strong> — Social posts, reel scripts, & broadcasts</span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-4" data-aos="fade-up" data-aos-duration="700" data-aos-delay="400">
+            <a href="#contact" onclick="navigateToSection('contact'); return false;" class="btn-primary text-white px-7 py-3.5 rounded-xl text-sm flex items-center gap-2 glow-pulse">
+              Book a Free Consultation
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="animate-bounce-horizontal"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="#services" onclick="navigateToSection('services'); return false;" class="btn-secondary px-7 py-3.5 rounded-xl text-sm flex items-center gap-2">
+              View Services
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT: Interactive Content Showcase -->
+        <div class="relative flex flex-col w-full max-w-lg mx-auto" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+          <!-- Tab Headers -->
+          <div class="flex p-1 bg-slate-200/50 dark:bg-navy-800/60 backdrop-blur-md rounded-2xl mb-4 border border-slate-200/20">
+            <button onclick="switchHeroTab('social')" id="tab-btn-social" class="flex-1 py-2.5 text-xs sm:text-sm font-display font-700 rounded-xl transition-all duration-300 bg-white dark:bg-blue text-blue dark:text-white shadow-sm">
+              Social Post
+            </button>
+            <button onclick="switchHeroTab('reel')" id="tab-btn-reel" class="flex-1 py-2.5 text-xs sm:text-sm font-display font-700 rounded-xl transition-all duration-300 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white">
+              Reel Script
+            </button>
+            <button onclick="switchHeroTab('whatsapp')" id="tab-btn-whatsapp" class="flex-1 py-2.5 text-xs sm:text-sm font-display font-700 rounded-xl transition-all duration-300 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white">
+              Broadcast
+            </button>
+          </div>
+
+          <!-- Tab Content Container -->
+          <div class="glass rounded-3xl p-5 min-h-[360px] flex flex-col justify-between relative overflow-hidden shadow-xl shadow-slate-200/40 dark:shadow-none">
+            
+            <!-- Dynamic Tab: Social Media Post -->
+            <div id="hero-tab-social" class="space-y-4 tab-content-item transition-all duration-300 opacity-100">
+              <!-- Instagram Header Mockup -->
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue to-emerald flex items-center justify-center text-white text-xs font-display font-800">M</div>
+                  <div>
+                    <p class="text-slate-900 dark:text-white text-xs font-display font-700">your_practice_mfd</p>
+                    <p class="text-slate-400 text-[10px]">Educational Post</p>
+                  </div>
+                </div>
+                <button class="text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                </button>
+              </div>
+              
+              <!-- Post Graphic Mockup -->
+              <div id="mockup-graphic-bg" class="aspect-video w-full rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200/50 dark:from-slate-800 dark:to-navy-800 border border-slate-200/10 flex flex-col justify-between p-4 relative overflow-hidden group">
+                <div id="mockup-overlay-decor-1" class="absolute -right-10 -top-10 w-28 h-28 bg-emerald/10 dark:bg-emerald/20 rounded-full blur-xl"></div>
+                <div id="mockup-overlay-decor-2" class="absolute -left-10 -bottom-10 w-28 h-28 bg-blue/10 dark:bg-blue/20 rounded-full blur-xl"></div>
+                <div class="flex justify-between items-start z-10">
+                  <span class="text-[9px] uppercase tracking-wider font-display font-800 text-blue bg-blue/10 px-2 py-0.5 rounded-md">Investor Awareness</span>
+                  <div class="w-6 h-6 rounded-full bg-white/80 dark:bg-slate-700/80 flex items-center justify-center">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-emerald"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+                  </div>
+                </div>
+                <div class="z-10 py-2">
+                  <p id="mockup-graphic-title" class="text-slate-900 dark:text-white font-display font-800 text-base leading-tight">The Power of Starting Early</p>
+                  <p id="mockup-graphic-subtext" class="text-slate-500 dark:text-slate-400 text-[11px] mt-1">How 10 years difference impacts your wealth gap.</p>
+                </div>
+                <div class="flex justify-between items-center z-10 pt-2 border-t border-slate-300/20 dark:border-slate-700/20">
+                  <div>
+                    <p class="text-[9px] text-slate-500 uppercase">Est. Value at Age 60</p>
+                    <p class="text-slate-900 dark:text-white font-display font-800 text-xs">₹1.76 Crore vs ₹56 Lakhs</p>
+                  </div>
+                  <span class="text-[10px] font-display font-700 text-emerald">SIP ₹5,000/mo</span>
+                </div>
+              </div>
+
+              <!-- Action Bar Mockup -->
+              <div class="flex justify-between items-center text-slate-500 dark:text-slate-400">
+                <div class="flex gap-4">
+                  <button class="hover:text-rose-500 transition-colors">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                  </button>
+                  <button class="hover:text-blue transition-colors">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                  </button>
+                  <button class="hover:text-emerald transition-colors">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                  </button>
+                </div>
+                <button class="hover:text-blue transition-colors">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                </button>
+              </div>
+
+              <!-- Caption -->
+              <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                <span class="font-display font-800 text-slate-900 dark:text-white mr-1.5">your_practice_mfd</span><span id="mockup-post-caption">Delaying your SIP even by a few years can cost you lakhs. Time in the market is way more important than timing the market. ⏳📈 #investingbasics #sip #compounding</span>
+              </p>
+            </div>
+
+            <!-- Dynamic Tab: Reel Script (Hidden by default) -->
+            <div id="hero-tab-reel" class="space-y-4 tab-content-item hidden opacity-0 transition-all duration-300">
+              <div class="flex items-center justify-between border-b border-slate-200/10 pb-2">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></span>
+                  <p class="text-slate-900 dark:text-white text-xs font-display font-700">Reel Script Idea</p>
+                </div>
+                <span class="text-[10px] bg-slate-200 dark:bg-slate-700/50 px-2 py-0.5 rounded-md text-slate-600 dark:text-slate-400 font-display">Duration: ~30s</span>
+              </div>
+              
+              <!-- Script Body -->
+              <div class="space-y-3 text-xs leading-relaxed max-h-[220px] overflow-y-auto pr-1">
+                <div>
+                  <span class="text-[10px] text-blue font-display font-800 uppercase tracking-wide block">🎬 [0-5s] Hook:</span>
+                  <p class="text-slate-700 dark:text-slate-300 font-semibold bg-slate-100 dark:bg-slate-800/40 p-2 rounded-lg mt-1 border-l-2 border-blue">
+                    "Want to lose ₹1 Crore? Just wait 10 years before you start investing."
+                  </p>
+                </div>
+                <div>
+                  <span class="text-[10px] text-emerald font-display font-800 uppercase tracking-wide block">📊 [5-20s] Core Explanation:</span>
+                  <p id="mockup-reel-body" class="text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800/40 p-2 rounded-lg mt-1 border-l-2 border-emerald">
+                    "If you start a ₹5,000 monthly SIP at age 25, you could have ₹1.7 Crore by age 60. But if you wait until 35, you'll have only ₹56 Lakhs. Same monthly saving, but you lose over ₹1 Crore in compounding value!"
+                  </p>
+                </div>
+                <div>
+                  <span class="text-[10px] text-amber-500 font-display font-800 uppercase tracking-wide block">📢 [20-30s] Call To Action:</span>
+                  <p class="text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800/40 p-2 rounded-lg mt-1 border-l-2 border-amber-500">
+                    "Don't lose your wealth to delay. Comment 'SIP' below, and I'll send you a personalized wealth calculation chart!"
+                  </p>
+                </div>
+              </div>
+              
+              <div class="flex items-center gap-2 pt-2 border-t border-slate-200/10">
+                <span class="text-[9px] text-slate-400">Prompt: "Copy and record. Perfect for Instagram Reels or YouTube Shorts."</span>
+              </div>
+            </div>
+
+            <!-- Dynamic Tab: WhatsApp Broadcast (Hidden by default) -->
+            <div id="hero-tab-whatsapp" class="space-y-4 tab-content-item hidden opacity-0 transition-all duration-300">
+              <div class="flex items-center justify-between border-b border-slate-200/10 pb-2">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-full bg-emerald flex items-center justify-center text-white">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+                  </div>
+                  <p class="text-slate-900 dark:text-white text-xs font-display font-700">WhatsApp Broadcast</p>
+                </div>
+                <span class="text-[9px] text-emerald font-display font-600">Perfect for Client Lists</span>
+              </div>
+              
+              <!-- WhatsApp Bubble Mockup -->
+              <div class="bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-500/10 p-3 rounded-2xl relative">
+                <div class="absolute -left-1.5 top-3 w-3 h-3 bg-emerald-50 dark:bg-emerald-950/20 rotate-45 border-l border-b border-emerald-500/10"></div>
+                <div id="mockup-whatsapp-body" class="text-[11px] leading-relaxed text-slate-800 dark:text-slate-200 whitespace-pre-line z-10 relative">
+                  Hi there! 👋
+
+                  Did you know that skipping just one year of investing can cost you lakhs in the long run?
+
+                  Here is a quick example of a *₹10,000 monthly SIP*:
+                  👉 *15 Years:* Invest ₹18L -> Value: *~₹50.4 Lakhs*
+                  👉 *20 Years:* Invest ₹24L -> Value: *~₹99.9 Lakhs*
+
+                  Compounding works best when you give it time. Need to map your financial goals? Let's connect this week!
+
+                  Best regards,
+                  *Your Practice Team*
+                </div>
+              </div>
+              
+              <div class="flex items-center justify-between text-[10px] text-slate-400">
+                <span>Copy text & send to lists</span>
+                <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald"></span> Ready to send</span>
+              </div>
+            </div>
+
+
+            <!-- Bottom Note -->
+            <div class="mt-4 pt-3 border-t border-slate-200/10 flex items-center justify-between">
+              <span class="text-[10px] text-slate-500 dark:text-slate-400">Professional digital presence in minutes</span>
+              <span class="text-[10px] font-display font-700 text-blue">MFD-Dost</span>
+            </div>
+
+          </div>
+
+          <!-- Floating badges -->
+          <div class="absolute -top-4 -right-4 glass rounded-2xl px-3.5 py-2.5 hidden sm:flex items-center gap-2 dash-card" style="animation-delay:-0.8s">
+            <div class="w-7 h-7 rounded-xl flex items-center justify-center bg-emerald/10 text-emerald">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </div>
+            <div>
+              <p class="text-slate-900 dark:text-white text-xs font-display font-700">Consistent</p>
+              <p class="text-slate-500 text-xs">Content Flow</p>
+            </div>
+          </div>
+
+          <div class="absolute -bottom-4 -left-4 glass rounded-2xl px-3.5 py-2.5 hidden sm:flex items-center gap-2 dash-card" style="animation-delay:-2.2s">
+            <div class="w-7 h-7 rounded-xl flex items-center justify-center bg-blue/10 text-blue">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </div>
+            <div>
+              <p class="text-slate-900 dark:text-white text-xs font-display font-700">Social Ready</p>
+              <p class="text-slate-500 text-xs">Posts & Reels</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="flex justify-center mt-14 bounce opacity-40">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider hidden"></div>
+
+  <!-- ════════════════════════════════ WHY CONTENT MATTERS ════════════════════════════════ -->
+  <section id="why" class="hidden spa-section py-20 lg:py-28 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+      <!-- Section header -->
+      <div class="text-center max-w-2xl mx-auto mb-14" data-aos="fade-up">
+        <p class="section-label mb-3">Why It Matters</p>
+        <h2 class="font-display font-800 text-3xl lg:text-4xl xl:text-5xl text-slate-900 dark:text-white leading-tight mb-4">
+          Your Expertise Deserves <span class="gradient-text-blue">Visibility</span>
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
+          Investors search online before picking an advisor. Consistent, high-quality content helps you build credibility and reach new clients.
+        </p>
+      </div>
+
+      <!-- Feature cards grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <!-- Card 1 -->
+        <div class="feature-card glass rounded-2xl p-6 border border-transparent" data-aos="fade-up" data-aos-delay="0">
+          <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="font-display font-700 text-slate-900 dark:text-white text-base mb-2">Build Authority</h3>
+          <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Demonstrate your financial expertise and NISM-aligned standards easily.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="feature-card glass rounded-2xl p-6 border border-transparent" data-aos="fade-up" data-aos-delay="100">
+          <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3 class="font-display font-700 text-slate-900 dark:text-white text-base mb-2">Stay Top-of-Mind</h3>
+          <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Maintain constant digital visibility without the daily brainstorming stress.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="feature-card glass rounded-2xl p-6 border border-transparent" data-aos="fade-up" data-aos-delay="200">
+          <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3 class="font-display font-700 text-slate-900 dark:text-white text-base mb-2">Simplify Investing</h3>
+          <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Break down complex compounding & asset allocation concepts for clients.</p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="feature-card glass rounded-2xl p-6 border border-transparent" data-aos="fade-up" data-aos-delay="300">
+          <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-5">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="font-display font-700 text-slate-900 dark:text-white text-base mb-2">Save Valuable Time</h3>
+          <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Spend less time design planning and more time building key client relationships.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider hidden"></div>
+
+  <!-- ════════════════════════════════ SIP CALCULATOR ════════════════════════════════ -->
+  <section id="calculator" class="hidden spa-section py-20 lg:py-28 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      
+      <!-- Section header -->
+      <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+        <p class="section-label mb-3">Interactive Tool</p>
+        <h2 class="font-display font-800 text-3xl lg:text-4xl xl:text-5xl text-slate-900 dark:text-white leading-tight mb-4">
+          SIP Wealth <span class="gradient-text-blue">Estimator</span>
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
+          Demonstrate the power of compounding to your clients. Adjust the values to see the estimated wealth growth.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <!-- Sliders Column -->
+        <div class="lg:col-span-7 space-y-6" data-aos="fade-right">
+          <div class="glass rounded-3xl p-6 sm:p-8 space-y-6">
+            
+            <!-- Slider 1: Amount -->
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <label for="sip-amount" class="text-sm font-display font-700 text-slate-700 dark:text-slate-300">Monthly SIP Amount</label>
+                <div class="flex items-center gap-1 bg-slate-100 dark:bg-navy-800 px-3 py-1 rounded-xl border border-slate-200/20">
+                  <span class="text-slate-500 text-xs">₹</span>
+                  <input type="text" id="sip-amount-text" value="10,000" class="w-16 bg-transparent text-right text-slate-900 dark:text-white text-sm font-display font-700 focus:outline-none" readonly>
+                </div>
+              </div>
+              <input type="range" id="sip-amount" min="1000" max="100000" step="1000" value="10000" class="w-full h-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue">
+              <div class="flex justify-between text-[10px] text-slate-400">
+                <span>₹1k</span>
+                <span>₹50k</span>
+                <span>₹100k</span>
+              </div>
+            </div>
+
+            <!-- Slider 2: Rate -->
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <label for="sip-rate" class="text-sm font-display font-700 text-slate-700 dark:text-slate-300">Expected Return Rate (p.a.)</label>
+                <div class="flex items-center gap-1 bg-slate-100 dark:bg-navy-800 px-3 py-1 rounded-xl border border-slate-200/20">
+                  <input type="text" id="sip-rate-text" value="12" class="w-10 bg-transparent text-right text-slate-900 dark:text-white text-sm font-display font-700 focus:outline-none" readonly>
+                  <span class="text-slate-500 text-xs">%</span>
+                </div>
+              </div>
+              <input type="range" id="sip-rate" min="5" max="20" step="0.5" value="12" class="w-full h-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue">
+              <div class="flex justify-between text-[10px] text-slate-400">
+                <span>5%</span>
+                <span>12%</span>
+                <span>20%</span>
+              </div>
+            </div>
+
+            <!-- Slider 3: Years -->
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <label for="sip-years" class="text-sm font-display font-700 text-slate-700 dark:text-slate-300">Time Period</label>
+                <div class="flex items-center gap-1 bg-slate-100 dark:bg-navy-800 px-3 py-1 rounded-xl border border-slate-200/20">
+                  <input type="text" id="sip-years-text" value="15" class="w-8 bg-transparent text-right text-slate-900 dark:text-white text-sm font-display font-700 focus:outline-none" readonly>
+                  <span class="text-slate-500 text-xs">Yrs</span>
+                </div>
+              </div>
+              <input type="range" id="sip-years" min="1" max="30" step="1" value="15" class="w-full h-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue">
+              <div class="flex justify-between text-[10px] text-slate-400">
+                <span>1 Yr</span>
+                <span>15 Yrs</span>
+                <span>30 Yrs</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Output Column -->
+        <div class="lg:col-span-5" data-aos="fade-left">
+          <div class="glass rounded-3xl p-6 sm:p-8 space-y-6 relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 w-44 h-44 bg-blue/5 dark:bg-blue/10 rounded-full blur-2xl"></div>
+            
+            <h3 class="text-lg font-display font-800 text-slate-900 dark:text-white pb-3 border-b border-slate-200/10">Estimated Wealth Projection</h3>
+            
+            <!-- Result Items -->
+            <div class="space-y-4">
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-slate-500 dark:text-slate-400">Total Investment</span>
+                <span id="calc-invested" class="text-base font-display font-700 text-slate-900 dark:text-white">₹18,00,000</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-slate-500 dark:text-slate-400">Est. Returns</span>
+                <span id="calc-returns" class="text-base font-display font-700 text-emerald">₹32,45,755</span>
+              </div>
+              <div class="flex justify-between items-center pt-3 border-t border-dashed border-slate-300/30 dark:border-slate-700/30">
+                <span class="text-sm font-display font-700 text-slate-800 dark:text-slate-300">Total Value</span>
+                <span id="calc-total" class="text-xl font-display font-800 text-blue dark:text-blue-light">₹50,45,755</span>
+              </div>
+            </div>
+
+            <!-- Visualization Stacked Bar -->
+            <div class="space-y-2 pt-2">
+              <div class="flex justify-between text-[10px] text-slate-400">
+                <span>Invested: <span id="bar-invested-pct">35.6%</span></span>
+                <span>Gain: <span id="bar-returns-pct">64.4%</span></span>
+              </div>
+              <div class="w-full h-3 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden flex">
+                <div id="bar-invested" class="bg-blue h-full transition-all duration-300" style="width: 35.6%"></div>
+                <div id="bar-returns" class="bg-emerald h-full transition-all duration-300" style="width: 64.4%"></div>
+              </div>
+            </div>
+
+            <!-- Summary Text -->
+            <p id="calc-summary" class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed text-center italic bg-slate-100 dark:bg-navy-800/40 p-3.5 rounded-2xl">
+              An investment of ₹18.00 Lakhs grows to ₹50.46 Lakhs over 15 years!
+            </p>
+
+            <a href="#contact" onclick="navigateToSection('contact'); return false;" class="btn-primary text-white text-xs py-3.5 rounded-xl flex items-center justify-center gap-2">
+              Discuss Goal Planning Content
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider hidden"></div>
+
+  <!-- ════════════════════════════════ SERVICES ════════════════════════════════ -->
+  <section id="services" class="hidden spa-section py-20 lg:py-28 relative">
+    <div class="absolute inset-0 opacity-5" style="background:radial-gradient(ellipse 70% 50% at 50% 50%, #2563EB, transparent)"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+
+      <div class="text-center max-w-2xl mx-auto mb-14" data-aos="fade-up">
+        <p class="section-label mb-3">What We Offer</p>
+        <h2 class="font-display font-800 text-3xl lg:text-4xl xl:text-5xl text-slate-900 dark:text-white leading-tight mb-4">
+          Done-For-You <span class="gradient-text-blue">Content Assets</span>
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
+          Ready-to-use educational content designed specifically for Mutual Fund Distributors.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-2 gap-5">
+
+        <!-- Service 1 -->
+        <div class="service-card glass rounded-2xl p-7 border border-transparent hover:border-blue/20" data-aos="fade-up" data-aos-delay="0">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-display font-700 text-slate-900 dark:text-white text-lg mb-1">Social Media Templates</h3>
+              <p class="text-slate-500 dark:text-slate-400 text-sm">Visual posts & carousels on key investor topics.</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-1.5 pt-2">
+            <span class="text-[11px] px-2.5 py-1 rounded-full font-display bg-blue/10 dark:bg-blue/20 text-blue dark:text-blue-light border border-blue/10 dark:border-blue/30">SIP Awareness</span>
+            <span class="text-[11px] px-2.5 py-1 rounded-full font-display bg-blue/10 dark:bg-blue/20 text-blue dark:text-blue-light border border-blue/10 dark:border-blue/30">Investing Basics</span>
+            <span class="text-[11px] px-2.5 py-1 rounded-full font-display bg-blue/10 dark:bg-blue/20 text-blue dark:text-blue-light border border-blue/10 dark:border-blue/30">Compounding</span>
+          </div>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-card glass rounded-2xl p-7 border border-transparent hover:border-blue/20" data-aos="fade-up" data-aos-delay="100">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            </div>
+            <div>
+              <h3 class="font-display font-700 text-slate-900 dark:text-white text-lg mb-1">Short Video Scripts</h3>
+              <p class="text-slate-500 dark:text-slate-400 text-sm">Hook-focused video scripts for Reels and Shorts.</p>
+            </div>
+          </div>
+          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+            Ready-to-record video scripts designed to hook viewers, explain complex topics, and prompt client action in under 30 seconds.
+          </p>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-card glass rounded-2xl p-7 border border-transparent hover:border-blue/20" data-aos="fade-up" data-aos-delay="200">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <h3 class="font-display font-700 text-slate-900 dark:text-white text-lg mb-1">Client Broadcasts</h3>
+              <p class="text-slate-500 dark:text-slate-400 text-sm">Copy-paste WhatsApp broadcasts and client emails.</p>
+            </div>
+          </div>
+          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+            Pre-written client update templates to share market insights, mutual fund updates, and investor education seamlessly.
+          </p>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="service-card glass rounded-2xl p-7 border border-transparent hover:border-blue/20" data-aos="fade-up" data-aos-delay="300">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="icon-wrap w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div>
+              <h3 class="font-display font-700 text-slate-900 dark:text-white text-lg mb-1">Monthly Content Planner</h3>
+              <p class="text-slate-500 dark:text-slate-400 text-sm">Topic calendars and themes for consistent schedules.</p>
+            </div>
+          </div>
+          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+            Get a monthly thematic calendar that tells you exactly what to post and when, aligning with seasonal events and tax seasons.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Note box -->
+      <div class="mt-8 glass rounded-2xl p-5 flex items-start gap-3 border border-amber-500/20 dark:border-amber-500/30 bg-amber-500/5 dark:bg-amber-500/10 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+          <span class="text-amber-600 dark:text-amber-400 font-display font-600">Important:</span> MFD-Dost provides content creation and communication support only. No investment advice, recommendations, or financial planning services are offered. All content is for educational and informational purposes.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider hidden"></div>
+
+  <!-- ════════════════════════════════ GALLERY ════════════════════════════════ -->
+  <section id="gallery" class="hidden spa-section py-20 lg:py-28 relative">
+    <div class="absolute inset-0 opacity-5" style="background:radial-gradient(ellipse 70% 50% at 50% 50%, #2563EB, transparent)"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+
+      <div class="text-center max-w-2xl mx-auto mb-14" data-aos="fade-up">
+        <p class="section-label mb-3">Portfolio Showcase</p>
+        <h2 class="font-display font-800 text-3xl lg:text-4xl xl:text-5xl text-slate-900 dark:text-white leading-tight mb-4">
+          Our Content <span class="gradient-text-blue">Gallery</span>
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
+          Browse sample content pieces including social graphics, video scripts, broadcasts, and PDF guides.
+        </p>
+      </div>
+
+      <!-- Filters -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mb-10" data-aos="fade-up">
+        <button onclick="filterGallery('all')" id="filter-btn-all" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-display font-600 transition-all duration-300 bg-blue text-white shadow-md shadow-blue/20">All Work</button>
+        <button onclick="filterGallery('social-graphics')" id="filter-btn-social-graphics" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-display font-600 transition-all duration-300 bg-white dark:bg-navy-800 text-slate-600 dark:text-slate-300 border border-slate-200/20 hover:border-blue/50">Social Graphics</button>
+        <button onclick="filterGallery('reel-scripts')" id="filter-btn-reel-scripts" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-display font-600 transition-all duration-300 bg-white dark:bg-navy-800 text-slate-600 dark:text-slate-300 border border-slate-200/20 hover:border-blue/50">Reel Scripts</button>
+        <button onclick="filterGallery('broadcasts')" id="filter-btn-broadcasts" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-display font-600 transition-all duration-300 bg-white dark:bg-navy-800 text-slate-600 dark:text-slate-300 border border-slate-200/20 hover:border-blue/50">Broadcasts</button>
+        <button onclick="filterGallery('guides')" id="filter-btn-guides" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-display font-600 transition-all duration-300 bg-white dark:bg-navy-800 text-slate-600 dark:text-slate-300 border border-slate-200/20 hover:border-blue/50">Guides</button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div id="gallery-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" data-aos="fade-up" data-aos-delay="100">
+        <!-- Dynamically filled via JavaScript -->
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider hidden"></div>
+
+  <!-- ════════════════════════════════ PROCESS ════════════════════════════════ -->
+  <section id="process" class="hidden spa-section py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+      <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+        <p class="section-label mb-3">How It Works</p>
+        <h2 class="font-display font-800 text-3xl lg:text-4xl xl:text-5xl text-slate-900 dark:text-white leading-tight mb-4">
+          Simple & Structured <span class="gradient-text-blue">Workflow</span>
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400 text-lg">Launch and run your digital content engine in a few simple steps.</p>
+      </div>
+
+      <div class="relative max-w-4xl mx-auto">
+        <!-- Vertical line -->
+        <div class="hidden md:block absolute left-1/2 top-8 bottom-8 w-0.5 timeline-line opacity-30" style="transform:translateX(-50%)"></div>
+
+        <div class="space-y-8 md:space-y-0 md:grid md:grid-cols-1 md:gap-0">
+
+          <!-- Step 1 -->
+          <div class="timeline-item relative md:grid md:grid-cols-2 md:gap-12 items-center mb-10" data-aos="fade-right">
+            <div class="md:text-right md:pr-8 pb-4 md:pb-0">
+              <span class="section-label block mb-2">Step 01</span>
+              <h3 class="font-display font-700 text-slate-900 dark:text-white text-xl mb-2">Discovery Call</h3>
+              <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">A quick 30-minute session to map out your digital presence goals.</p>
+            </div>
+            <div class="relative flex items-center md:pl-8">
+              <div class="timeline-dot w-5 h-5 rounded-full flex-shrink-0 absolute left-0 md:left-0 top-1/2 -translate-y-1/2 md:relative md:top-auto md:translate-y-0 z-10"></div>
+              <div class="glass rounded-2xl p-4 ml-8 md:ml-4 w-full">
+                <div class="flex items-center gap-2.5">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.13-.93a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  <p class="text-slate-700 dark:text-slate-300 text-sm font-display font-600">30-minute free call</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="timeline-item relative md:grid md:grid-cols-2 md:gap-12 items-center mb-10" data-aos="fade-left">
+            <div class="order-2 md:order-1 relative flex items-center md:justify-end md:pr-8 pb-4 md:pb-0">
+              <div class="glass rounded-2xl p-4 mr-8 md:mr-4 w-full md:max-w-xs">
+                <div class="flex items-center gap-2.5">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                  <p class="text-slate-700 dark:text-slate-300 text-sm font-display font-600">Monthly topic calendar</p>
+                </div>
+              </div>
+              <div class="timeline-dot w-5 h-5 rounded-full flex-shrink-0 absolute right-0 md:right-0 top-1/2 -translate-y-1/2 md:relative md:top-auto md:translate-y-0 z-10"></div>
+            </div>
+            <div class="order-1 md:order-2 md:pl-8">
+              <span class="section-label block mb-2">Step 02</span>
+              <h3 class="font-display font-700 text-slate-900 dark:text-white text-xl mb-2">Content Planning</h3>
+              <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">We pick high-impact educational topics relevant to your client base.</p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="timeline-item relative md:grid md:grid-cols-2 md:gap-12 items-center mb-10" data-aos="fade-right">
+            <div class="md:text-right md:pr-8 pb-4 md:pb-0">
+              <span class="section-label block mb-2">Step 03</span>
+              <h3 class="font-display font-700 text-slate-900 dark:text-white text-xl mb-2">Content Creation</h3>
+              <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">We draft your templates, copy, and teleprompter-ready scripts.</p>
+            </div>
+            <div class="relative flex items-center md:pl-8">
+              <div class="timeline-dot w-5 h-5 rounded-full flex-shrink-0 absolute left-0 md:left-0 top-1/2 -translate-y-1/2 md:relative md:top-auto md:translate-y-0 z-10"></div>
+              <div class="glass rounded-2xl p-4 ml-8 md:ml-4 w-full">
+                <div class="flex items-center gap-2.5">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                  <p class="text-slate-700 dark:text-slate-300 text-sm font-display font-600">Structured content drafts</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="timeline-item relative md:grid md:grid-cols-2 md:gap-12 items-center mb-10" data-aos="fade-left">
+            <div class="order-2 md:order-1 relative flex items-center md:justify-end md:pr-8 pb-4 md:pb-0">
+              <div class="glass rounded-2xl p-4 mr-8 md:mr-4 w-full md:max-w-xs">
+                <div class="flex items-center gap-2.5">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <p class="text-slate-700 dark:text-slate-300 text-sm font-display font-600">Your review & approval</p>
+                </div>
+              </div>
+              <div class="timeline-dot w-5 h-5 rounded-full flex-shrink-0 absolute right-0 md:right-0 top-1/2 -translate-y-1/2 md:relative md:top-auto md:translate-y-0 z-10"></div>
+            </div>
+            <div class="order-1 md:order-2 md:pl-8">
+              <span class="section-label block mb-2">Step 04</span>
+              <h3 class="font-display font-700 text-slate-900 dark:text-white text-xl mb-2">Review & Customization</h3>
+              <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Customize content to match your brand style. You approve everything before posting.</p>
+            </div>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="timeline-item relative md:grid md:grid-cols-2 md:gap-12 items-center" data-aos="fade-right">
+            <div class="md:text-right md:pr-8 pb-4 md:pb-0">
+              <span class="section-label block mb-2">Step 05</span>
+              <h3 class="font-display font-700 text-slate-900 dark:text-white text-xl mb-2">Publish & Engage</h3>
+              <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Share templates, publish videos, and message clients to build brand authority.</p>
+            </div>
+            <div class="relative flex items-center md:pl-8">
+              <div class="timeline-dot w-5 h-5 rounded-full flex-shrink-0 absolute left-0 md:left-0 top-1/2 -translate-y-1/2 md:relative md:top-auto md:translate-y-0 z-10"></div>
+              <div class="glass rounded-2xl p-4 ml-8 md:ml-4 w-full">
+                <div class="flex items-center gap-2.5">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                  <p class="text-slate-700 dark:text-slate-300 text-sm font-display font-600">Consistent digital presence</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider hidden"></div>
+
+  <!-- ════════════════════════════════ ABOUT ════════════════════════════════ -->
+  <section id="about" class="hidden spa-section py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+
+        <!-- Left -->
+        <div data-aos="fade-right">
+          <p class="section-label mb-3">About</p>
+          <h2 class="font-display font-800 text-3xl lg:text-4xl xl:text-5xl text-slate-900 dark:text-white leading-tight mb-6">
+            Built with Industry <span class="gradient-text-blue">Understanding</span>
+          </h2>
+          <p class="text-slate-600 dark:text-slate-400 text-base leading-relaxed mb-6">
+            MFD-Dost was created to help Mutual Fund Distributors maintain a consistent and professional online presence through educational content.
+          </p>
+          <p class="text-slate-600 dark:text-slate-400 text-base leading-relaxed mb-8">
+            The service combines industry understanding with practical content creation support to make investor communication easier and more consistent for MFDs and IFAs.
+          </p>
+
+          <!-- Certifications -->
+          <div>
+            <p class="font-display font-600 text-slate-700 dark:text-slate-300 text-sm mb-4">NISM Certifications</p>
+            <div class="space-y-3">
+              <div class="cert-card glass rounded-xl p-4 flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-blue/10 dark:bg-blue/20">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+                </div>
+                <div>
+                  <p class="text-slate-900 dark:text-white text-sm font-display font-600">Mutual Funds — Series V-A</p>
+                  <p class="text-slate-500 dark:text-slate-400 text-xs">NISM Certified</p>
+                </div>
+              </div>
+              <div class="cert-card glass rounded-xl p-4 flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-emerald/10 dark:bg-emerald/20">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+                </div>
+                <div>
+                  <p class="text-slate-900 dark:text-white text-sm font-display font-600">Specialised Investment Fund (SIF) — Series XIII</p>
+                  <p class="text-slate-500 dark:text-slate-400 text-xs">NISM Certified</p>
+                </div>
+              </div>
+              <div class="cert-card glass rounded-xl p-4 flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-purple-500/10 dark:bg-purple-500/20">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+                </div>
+                <div>
+                  <p class="text-slate-900 dark:text-white text-sm font-display font-600">Equity Derivatives — Series VIII</p>
+                  <p class="text-slate-500 dark:text-slate-400 text-xs">NISM Certified</p>
+                </div>
+              </div>
+              <div class="cert-card glass rounded-xl p-4 flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-orange-500/10 dark:bg-orange-500/20">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+                </div>
+                <div>
+                  <p class="text-slate-900 dark:text-white text-sm font-display font-600">Commodity Derivatives — Series XVI</p>
+                  <p class="text-slate-500 dark:text-slate-400 text-xs">NISM Certified</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Founder Note -->
+        <div data-aos="fade-left">
+          <div class="glass rounded-3xl p-8 relative overflow-hidden">
+            <!-- Decorative -->
+            <div class="absolute top-0 right-0 w-40 h-40 opacity-5" style="background:radial-gradient(circle, #10B981, transparent)"></div>
+
+            <div class="quote-mark mb-2">&ldquo;</div>
+
+            <p class="section-label mb-4">Founder's Note</p>
+            <h3 class="font-display font-700 text-slate-900 dark:text-white text-xl mb-5">Why I Started MFD-Dost</h3>
+
+            <p class="text-slate-600 dark:text-slate-400 text-base leading-relaxed mb-5">
+              As someone with NISM certifications and an interest in investor education, I noticed that many Mutual Fund Distributors understand investing well — but often struggle to create content consistently.
+            </p>
+            <p class="text-slate-600 dark:text-slate-400 text-base leading-relaxed mb-7">
+              MFD-Dost was started with a simple goal: helping distributors communicate more effectively through educational content while saving time — so they can focus on what they do best.
+            </p>
+
+            <!-- Profile chip -->
+            <div class="flex items-center gap-3 pt-5 border-t border-slate-200/20 dark:border-slate-700/20">
+              <div class="w-11 h-11 rounded-full flex items-center justify-center text-white font-display font-700 text-base" style="background:linear-gradient(135deg,#2563EB,#10B981)">M</div>
+              <div>
+                <p class="text-slate-900 dark:text-white text-sm font-display font-600">Founder, MFD-Dost</p>
+                <p class="text-slate-500 dark:text-slate-400 text-xs">NISM Certified · Content Creation for MFDs</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Not an RIA notice -->
+          <div class="mt-4 glass rounded-xl p-4 flex items-start gap-3 border border-amber-500/20 dark:border-amber-500/30 bg-amber-500/5 dark:bg-amber-500/10 shadow-sm">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <p class="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">The founder is <strong class="text-slate-800 dark:text-slate-200">not</strong> a SEBI Registered Investment Adviser (RIA). This service is limited to content creation and communication support only.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider hidden"></div>
+
+  <!-- ════════════════════════════════ CTA BANNER ════════════════════════════════ -->
+  <section id="cta-banner" class="hidden spa-section py-20 lg:py-24 relative overflow-hidden">
+    <div class="absolute inset-0" style="background:linear-gradient(135deg, rgba(37,99,235,0.08) 0%, rgba(16,185,129,0.05) 50%, rgba(37,99,235,0.04) 100%)"></div>
+    <div class="absolute inset-0 hero-grid opacity-20 dark:opacity-30"></div>
+    <div class="absolute top-0 left-0 right-0 h-px" style="background:linear-gradient(90deg,transparent,rgba(37,99,235,0.3),rgba(16,185,129,0.3),transparent)"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-px" style="background:linear-gradient(90deg,transparent,rgba(16,185,129,0.2),rgba(37,99,235,0.2),transparent)"></div>
+
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center relative z-10" data-aos="fade-up">
+      <p class="section-label mb-4">Get Started</p>
+      <h2 class="font-display font-800 text-3xl lg:text-5xl text-slate-900 dark:text-white leading-tight mb-5">
+        Ready to Strengthen Your <span class="gradient-text-blue">Digital Presence?</span>
+      </h2>
+      <p class="text-slate-600 dark:text-slate-400 text-lg mb-8 leading-relaxed">
+        Let's discuss how educational content can support your communication efforts and help you maintain a consistent professional presence online.
+      </p>
+      <a href="#contact" onclick="navigateToSection('contact'); return false;" class="btn-primary inline-flex items-center gap-2 text-white px-8 py-4 rounded-xl text-base">
+        Schedule a Free Consultation
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <div class="section-divider hidden"></div>
+
+  <!-- ════════════════════════════════ CONTACT ════════════════════════════════ -->
+  <section id="contact" class="hidden spa-section py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+
+        <!-- Left info -->
+        <div data-aos="fade-right">
+          <p class="section-label mb-3">Contact</p>
+          <h2 class="font-display font-800 text-3xl lg:text-4xl xl:text-5xl text-slate-900 dark:text-white leading-tight mb-6">
+            Let's <span class="gradient-text-blue">Connect</span>
+          </h2>
+          <p class="text-slate-600 dark:text-slate-400 text-base leading-relaxed mb-8">
+            Ready to discuss how educational content can support your practice? Book a free 30-minute consultation to get started.
+          </p>
+
+          <!-- Contact options -->
+          <div class="space-y-4 mb-8">
+            <a href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer" class="btn-emerald flex items-center gap-3 text-white px-6 py-4 rounded-xl text-sm w-full sm:w-auto justify-center sm:justify-start sm:inline-flex">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              Chat on WhatsApp
+            </a>
+            <a href="mailto:hello@mfddost.com" class="btn-secondary flex items-center gap-3 px-6 py-4 rounded-xl text-sm w-full sm:w-auto justify-center sm:justify-start sm:inline-flex ml-0 sm:ml-3">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Send an Email
+            </a>
+          </div>
+
+          <!-- What to expect -->
+          <div class="glass rounded-2xl p-5 space-y-3">
+            <p class="font-display font-600 text-slate-700 dark:text-slate-300 text-sm mb-3">What to expect in the consultation:</p>
+            <div class="flex items-center gap-2.5 text-sm text-slate-600 dark:text-slate-400">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              A 30-minute free call with no obligation
+            </div>
+            <div class="flex items-center gap-2.5 text-sm text-slate-600 dark:text-slate-400">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Discussion of your content goals and audience
+            </div>
+            <div class="flex items-center gap-2.5 text-sm text-slate-600 dark:text-slate-400">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Understanding how the service can support you
+            </div>
+            <div class="flex items-center gap-2.5 text-sm text-slate-600 dark:text-slate-400">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Sample content overview
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div data-aos="fade-left">
+          <div class="glass rounded-3xl p-7 lg:p-8">
+            <h3 class="font-display font-700 text-slate-900 dark:text-white text-xl mb-6">Book My Free Consultation</h3>
+
+            <form id="contact-form" class="space-y-4" onsubmit="handleFormSubmit(event)">
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-display font-600 text-slate-500 dark:text-slate-400 mb-1.5" for="name">Full Name *</label>
+                  <input id="name" name="name" type="text" required placeholder="Your name" class="form-input w-full px-4 py-3 rounded-xl text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs font-display font-600 text-slate-500 dark:text-slate-400 mb-1.5" for="email">Email Address *</label>
+                  <input id="email" name="email" type="email" required placeholder="your@email.com" class="form-input w-full px-4 py-3 rounded-xl text-sm" />
+                </div>
+              </div>
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-display font-600 text-slate-500 dark:text-slate-400 mb-1.5" for="mobile">Mobile Number</label>
+                  <input id="mobile" name="mobile" type="tel" placeholder="+91 98765 43210" class="form-input w-full px-4 py-3 rounded-xl text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs font-display font-600 text-slate-500 dark:text-slate-400 mb-1.5" for="business">Business Name</label>
+                  <input id="business" name="business" type="text" placeholder="Your firm name" class="form-input w-full px-4 py-3 rounded-xl text-sm" />
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-display font-600 text-slate-500 dark:text-slate-400 mb-1.5" for="message">Message</label>
+                <textarea id="message" name="message" rows="3" placeholder="Tell us about your content goals, audience, or any specific requirements..." class="form-input w-full px-4 py-3 rounded-xl text-sm resize-none"></textarea>
+              </div>
+
+              <!-- Upload Sample Content -->
+              <div>
+                <label class="block text-xs font-display font-600 text-slate-500 dark:text-slate-400 mb-1.5">Upload Sample Content (Optional)</label>
+                <div class="border border-dashed border-slate-300 dark:border-slate-700 hover:border-blue dark:hover:border-blue-light rounded-xl p-4 transition-all duration-300 text-center relative bg-slate-50/50 dark:bg-navy-800/20" id="drop-zone">
+                  <input type="file" id="sample-content" name="sample-content" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="handleFileSelect(event)">
+                  <div class="space-y-1">
+                    <svg class="mx-auto h-7 w-7 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                    </svg>
+                    <p class="text-xs text-slate-650 dark:text-slate-400 font-display font-500" id="file-upload-text">
+                      Drag & drop your file here, or <span class="text-blue dark:text-blue-light font-700">browse</span>
+                    </p>
+                    <p class="text-[10px] text-slate-400">PDF, Doc, Images, or Text (Max 5MB)</p>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-primary w-full text-white py-4 rounded-xl text-sm flex items-center justify-center gap-2">
+                <span id="form-btn-text">Book My Free Consultation</span>
+                <svg id="form-btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+
+              <!-- Form disclaimer -->
+              <p class="text-slate-500 dark:text-slate-500 text-xs text-center leading-relaxed pt-1">
+                By submitting, you agree to be contacted regarding this service. We do not share your information with third parties.
+              </p>
+            </form>
+
+            <!-- Success state (hidden) -->
+            <div id="form-success" class="hidden text-center py-8">
+              <div class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center" style="background:rgba(16,185,129,0.1);border:2px solid rgba(16,185,129,0.3)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <h4 class="font-display font-700 text-slate-900 dark:text-white text-lg mb-2">Thank you for reaching out!</h4>
+              <p class="text-slate-500 dark:text-slate-400 text-sm">We'll get back to you within 24 hours to schedule your free consultation.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ FOOTER ════════════════════════════════ -->
+  <footer class="border-t border-slate-200 dark:border-slate-800/60 pt-14 pb-8 bg-slate-100/50 dark:bg-slate-950/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+      <!-- Top footer -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
+
+        <!-- Brand -->
+        <div class="lg:col-span-2">
+          <a href="#home" onclick="navigateToSection('home'); return false;" class="inline-block mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 155 38" width="145" height="31" role="img" aria-label="MFD-Dost">
+              <defs>
+                <linearGradient id="ftGD" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#2563EB"/>
+                  <stop offset="100%" stop-color="#10B981"/>
+                </linearGradient>
+                <linearGradient id="ftGB" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#2563EB"/>
+                  <stop offset="100%" stop-color="#10B981"/>
+                </linearGradient>
+              </defs>
+              <rect x="0" y="0" width="64" height="33" rx="7" fill="#1E293B"/>
+              <text x="32" y="23" text-anchor="middle" font-family="'Helvetica Neue',Arial,sans-serif" font-size="20" font-weight="900" letter-spacing="-0.5" fill="white">MFD</text>
+              <text x="66" y="23" font-family="'Helvetica Neue',Arial,sans-serif" font-size="22" font-weight="700" fill="url(#ftGD)">-</text>
+              <text x="78" y="23" font-family="'Helvetica Neue',Arial,sans-serif" font-size="24" font-weight="900" letter-spacing="-0.5" fill="url(#ftGD)">Dost</text>
+              <rect x="0" y="35" width="155" height="2.5" rx="1.25" fill="url(#ftGB)"/>
+            </svg>
+          </a>
+          <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-5 max-w-xs">
+            Educational content creation support for Mutual Fund Distributors, IFAs, and wealth professionals.
+          </p>
+          <!-- Social links -->
+          <div class="flex items-center gap-3">
+            <a href="#" aria-label="LinkedIn" class="w-9 h-9 glass rounded-xl flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-blue dark:hover:text-white transition-colors">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://wa.me/919999999999" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer" class="w-9 h-9 glass rounded-xl flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-blue dark:hover:text-white transition-colors">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            </a>
+            <a href="mailto:hello@mfddost.com" aria-label="Email" class="w-9 h-9 glass rounded-xl flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-blue dark:hover:text-white transition-colors">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick links -->
+        <div>
+          <p class="font-display font-600 text-slate-700 dark:text-slate-300 text-sm mb-4">Quick Links</p>
+          <nav class="space-y-2.5">
+            <a href="#home" onclick="navigateToSection('home'); return false;" class="block text-slate-500 dark:text-slate-400 hover:text-blue dark:hover:text-slate-300 transition-colors text-sm">Home</a>
+            <a href="#why" onclick="navigateToSection('why'); return false;" class="block text-slate-500 dark:text-slate-400 hover:text-blue dark:hover:text-slate-300 transition-colors text-sm">Why It Matters</a>
+            <a href="#services" onclick="navigateToSection('services'); return false;" class="block text-slate-500 dark:text-slate-400 hover:text-blue dark:hover:text-slate-300 transition-colors text-sm">Services</a>
+            <a href="#gallery" onclick="navigateToSection('gallery'); return false;" class="block text-slate-500 dark:text-slate-400 hover:text-blue dark:hover:text-slate-300 transition-colors text-sm">Gallery</a>
+            <a href="#calculator" onclick="navigateToSection('calculator'); return false;" class="block text-slate-500 dark:text-slate-400 hover:text-blue dark:hover:text-slate-300 transition-colors text-sm">SIP Calculator</a>
+            <a href="#process" onclick="navigateToSection('process'); return false;" class="block text-slate-500 dark:text-slate-400 hover:text-blue dark:hover:text-slate-300 transition-colors text-sm">Process</a>
+            <a href="#about" onclick="navigateToSection('about'); return false;" class="block text-slate-500 dark:text-slate-400 hover:text-blue dark:hover:text-slate-300 transition-colors text-sm">About</a>
+            <a href="#contact" onclick="navigateToSection('contact'); return false;" class="block text-slate-500 dark:text-slate-400 hover:text-blue dark:hover:text-slate-300 transition-colors text-sm">Contact</a>
+          </nav>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <p class="font-display font-600 text-slate-700 dark:text-slate-300 text-sm mb-4">Contact</p>
+          <div class="space-y-2.5">
+            <a href="mailto:hello@mfddost.com" class="flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-blue dark:hover:text-slate-300 transition-colors text-sm">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              hello@mfddost.com
+            </a>
+            <a href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-blue dark:hover:text-slate-300 transition-colors text-sm">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Disclaimer -->
+      <div class="border-t border-slate-200 dark:border-slate-800/60 pt-7 mb-6">
+        <div class="glass rounded-xl p-5">
+          <p class="text-xs font-display font-600 text-slate-500 dark:text-slate-400 mb-2.5">Disclaimer</p>
+          <p class="text-slate-500 dark:text-slate-500 text-xs leading-relaxed">
+            This service provides content creation and communication support only. The content is intended solely for educational and informational purposes. No investment advice, investment recommendations, research reports, financial planning services, portfolio management services, or securities recommendations are provided. The founder is not registered as a SEBI Registered Investment Adviser (RIA). Clients are responsible for reviewing and approving all content before publication and ensuring compliance with applicable regulatory requirements, including guidelines issued by SEBI and AMFI.
+          </p>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4">
+        <p class="text-slate-500 dark:text-slate-500 text-xs">Copyright &copy; 2026 MFD-Dost. All Rights Reserved.</p>
+        <p class="text-slate-500 dark:text-slate-500 text-xs">Content Creation for Mutual Fund Distributors</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════ LIGHTBOX MODAL ════════════════════════════════ -->
+  <div id="gallery-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-md transition-all duration-300">
+    <div class="glass max-w-2xl w-full rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh] scale-95 opacity-0 transition-all duration-300" id="modal-content-card">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between p-6 border-b border-slate-200/10">
+        <div class="flex items-center gap-2.5">
+          <span id="modal-badge" class="text-[10px] uppercase tracking-wider font-display font-800 px-2.5 py-1 rounded-md">Category</span>
+          <h3 id="modal-title" class="font-display font-800 text-lg sm:text-xl text-slate-900 dark:text-white leading-tight">Content Title</h3>
+        </div>
+        <button onclick="closeGalleryModal()" class="w-8 h-8 flex items-center justify-center rounded-xl bg-slate-200/50 dark:bg-slate-700/50 hover:bg-slate-300/50 dark:hover:bg-slate-600/50 text-slate-700 dark:text-slate-350 transition-colors" aria-label="Close modal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 overflow-y-auto space-y-6 flex-1">
+        <!-- Visual Mockup Container -->
+        <div id="modal-preview-container" class="w-full flex justify-center bg-slate-100 dark:bg-navy-800/40 p-4 rounded-2xl border border-slate-200/10">
+          <!-- Populated by JS -->
+        </div>
+        
+        <!-- Description -->
+        <div>
+          <h4 class="text-[10px] font-display font-700 text-slate-500 uppercase tracking-wider mb-2">Description</h4>
+          <p id="modal-description" class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Detailed description...</p>
+        </div>
+        
+        <!-- Template Content -->
+        <div id="modal-copy-section" class="space-y-2">
+          <div class="flex justify-between items-center">
+            <h4 class="text-[10px] font-display font-700 text-slate-500 uppercase tracking-wider">Template Text</h4>
+            <button id="modal-copy-btn" onclick="copyModalContent()" class="text-xs font-display font-600 text-blue dark:text-blue-light hover:underline flex items-center gap-1.5 transition-all">
+              <svg id="copy-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue dark:text-blue-light"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span id="copy-btn-text">Copy Template Text</span>
+            </button>
+          </div>
+          <div class="bg-slate-100 dark:bg-slate-800/60 p-4 rounded-2xl border border-slate-200/10">
+            <pre id="modal-content-text" class="text-xs font-sans whitespace-pre-wrap text-slate-800 dark:text-slate-200 leading-relaxed max-h-[180px] overflow-y-auto pr-1"></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-6 border-t border-slate-200/10 flex justify-end gap-3 bg-slate-50/50 dark:bg-navy-800/20">
+        <button onclick="closeGalleryModal()" class="btn-secondary px-5 py-2.5 rounded-xl text-xs">Close</button>
+        <a href="#contact" onclick="closeGalleryModal(); navigateToSection('contact'); return false;" class="btn-primary text-white px-5 py-2.5 rounded-xl text-xs flex items-center gap-1.5">
+          Get Custom Version
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    // ── AOS Init ──
+    AOS.init({
+      duration: 700,
+      once: true,
+      easing: 'ease-out-cubic',
+      offset: 60,
+    });
+
+    // ── Progress bar ──
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = (scrollTop / scrollHeight) * 100;
+      document.getElementById('progress-bar').style.width = progress + '%';
+    });
+
+    // ── Navbar scroll ──
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 20) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // ── Hamburger ──
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let menuOpen = false;
+
+    hamburger.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      if (menuOpen) {
+        mobileMenu.classList.add('open');
+        const lines = hamburger.querySelectorAll('.ham-line');
+        lines[0].style.transform = 'translateY(8px) rotate(45deg)';
+        lines[1].style.opacity = '0';
+        lines[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+        lines[2].style.width = '20px';
+      } else {
+        closeMobileMenu();
+      }
+    });
+
+    function closeMobileMenu() {
+      menuOpen = false;
+      mobileMenu.classList.remove('open');
+      const lines = hamburger.querySelectorAll('.ham-line');
+      lines[0].style.transform = '';
+      lines[1].style.opacity = '1';
+      lines[2].style.transform = '';
+      lines[2].style.width = '12px';
+    }
+
+    // Close menu on outside click
+    document.addEventListener('click', (e) => {
+      if (menuOpen && !hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
+
+    // ── Form submit ──
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      const btnText = document.getElementById('form-btn-text');
+      const btnIcon = document.getElementById('form-btn-icon');
+
+      btnText.textContent = 'Sending...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        document.getElementById('contact-form').style.display = 'none';
+        document.getElementById('form-success').classList.remove('hidden');
+      }, 1500);
+    }
+
+    // ── SPA Section Navigation Logic ──
+    const spaSections = {
+      'home': ['home'],
+      'why': ['why'],
+      'services': ['services', 'cta-banner'],
+      'gallery': ['gallery'],
+      'calculator': ['calculator'],
+      'process': ['process'],
+      'about': ['about'],
+      'contact': ['contact']
+    };
+
+    function navigateToSection(targetId) {
+      // Hide all section groups
+      Object.keys(spaSections).forEach(key => {
+        spaSections[key].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.classList.add('hidden');
+            el.classList.remove('spa-section'); // reset animation
+          }
+        });
+      });
+
+      // Show target section group
+      if (spaSections[targetId]) {
+        spaSections[targetId].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.classList.remove('hidden');
+            el.classList.add('spa-section'); // trigger entry animation
+          }
+        });
+      }
+
+      // Smooth scroll to top of page
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Update active nav-link highlighting
+      updateNavHighlight(targetId);
+
+      // Re-trigger AOS animations for newly visible section
+      setTimeout(() => {
+        if (typeof AOS !== 'undefined') {
+          AOS.refresh();
+        }
+      }, 100);
+    }
+
+    function updateNavHighlight(activeId) {
+      const linkIds = ['home', 'why', 'services', 'gallery', 'calculator', 'process', 'about', 'contact'];
+      linkIds.forEach(id => {
+        const desktopLink = document.getElementById(`nav-${id}`);
+        if (desktopLink) {
+          if (id === activeId) {
+            desktopLink.classList.add('text-blue', 'dark:text-white', 'font-bold');
+          } else {
+            desktopLink.classList.remove('text-blue', 'dark:text-white', 'font-bold');
+          }
+        }
+      });
+    }
+
+    // ── File Selection & Drag-and-Drop Handlers ──
+    function handleFileSelect(e) {
+      const fileInput = e.target;
+      const uploadText = document.getElementById('file-upload-text');
+      if (fileInput.files && fileInput.files.length > 0 && uploadText) {
+        const fileName = fileInput.files[0].name;
+        uploadText.innerHTML = `Selected file: <span class="text-emerald dark:text-emerald-light font-750">${fileName}</span>`;
+      }
+    }
+
+    // Set initial section on load & bind drag-drop handlers
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.substring(1);
+      if (hash && spaSections[hash]) {
+        navigateToSection(hash);
+      } else {
+        navigateToSection('home');
+      }
+
+      // Initialize content gallery
+      if (typeof renderGallery === 'function') {
+        renderGallery('all');
+      }
+
+      // Drag and drop event listeners
+      const dropZone = document.getElementById('drop-zone');
+      if (dropZone) {
+        ['dragenter', 'dragover'].forEach(eventName => {
+          dropZone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            dropZone.classList.add('border-blue', 'bg-blue/5', 'dark:bg-blue-light/5');
+          }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+          dropZone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('border-blue', 'bg-blue/5', 'dark:bg-blue-light/5');
+          }, false);
+        });
+      }
+    });
+
+    // ── Theme Switch Logic ──
+    const themeToggle = document.getElementById('theme-toggle');
+    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+    // Default theme is light, check localstorage or preferences
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+        lightIcon.classList.remove('hidden');
+    } else {
+        document.documentElement.classList.remove('dark');
+        document.body.classList.remove('dark');
+        darkIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+        if (document.documentElement.classList.contains('dark')) {
+            document.documentElement.classList.remove('dark');
+            document.body.classList.remove('dark');
+            localStorage.setItem('color-theme', 'light');
+            lightIcon.classList.add('hidden');
+            darkIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.add('dark');
+            document.body.classList.add('dark');
+            localStorage.setItem('color-theme', 'dark');
+            darkIcon.classList.add('hidden');
+            lightIcon.classList.remove('hidden');
+        }
+    });
+
+    // ── Hero Content Showcase Tab Switcher ──
+    function switchHeroTab(tabId) {
+        // Hide all tabs
+        const tabContents = document.querySelectorAll('.tab-content-item');
+        tabContents.forEach(content => {
+            content.classList.add('hidden');
+            content.classList.remove('opacity-100');
+            content.classList.add('opacity-0');
+        });
+
+        // Show selected tab
+        const activeContent = document.getElementById(`hero-tab-${tabId}`);
+        if (activeContent) {
+            activeContent.classList.remove('hidden');
+            // trigger reflow for animation
+            void activeContent.offsetWidth;
+            activeContent.classList.remove('opacity-0');
+            activeContent.classList.add('opacity-100');
+        }
+
+        // Reset button styles
+        const buttons = [
+            { id: 'tab-btn-social', active: 'bg-white dark:bg-blue text-blue dark:text-white shadow-sm', inactive: 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white' },
+            { id: 'tab-btn-reel', active: 'bg-white dark:bg-blue text-blue dark:text-white shadow-sm', inactive: 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white' },
+            { id: 'tab-btn-whatsapp', active: 'bg-white dark:bg-blue text-blue dark:text-white shadow-sm', inactive: 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white' }
+        ];
+
+        buttons.forEach(btn => {
+            const btnEl = document.getElementById(btn.id);
+            if (btnEl) {
+                if (btn.id === `tab-btn-${tabId}`) {
+                    btnEl.className = `flex-1 py-2.5 text-xs sm:text-sm font-display font-700 rounded-xl transition-all duration-300 ${btn.active}`;
+                } else {
+                    btnEl.className = `flex-1 py-2.5 text-xs sm:text-sm font-display font-700 rounded-xl transition-all duration-300 ${btn.inactive}`;
+                }
+            }
+        });
+    }
+
+
+
+    // ── SIP Calculator Logic ──
+    const sipAmountInput = document.getElementById('sip-amount');
+    const sipRateInput = document.getElementById('sip-rate');
+    const sipYearsInput = document.getElementById('sip-years');
+
+    const sipAmountText = document.getElementById('sip-amount-text');
+    const sipRateText = document.getElementById('sip-rate-text');
+    const sipYearsText = document.getElementById('sip-years-text');
+
+    const calcInvested = document.getElementById('calc-invested');
+    const calcReturns = document.getElementById('calc-returns');
+    const calcTotal = document.getElementById('calc-total');
+
+    const barInvested = document.getElementById('bar-invested');
+    const barReturns = document.getElementById('bar-returns');
+    const barInvestedPct = document.getElementById('bar-invested-pct');
+    const barReturnsPct = document.getElementById('bar-returns-pct');
+    const calcSummary = document.getElementById('calc-summary');
+
+    function calculateSIP() {
+        const P = parseFloat(sipAmountInput.value);
+        const annualRate = parseFloat(sipRateInput.value);
+        const years = parseFloat(sipYearsInput.value);
+
+        // Update slider display text values
+        sipAmountText.value = P.toLocaleString('en-IN');
+        sipRateText.value = annualRate;
+        sipYearsText.value = years;
+
+        const i = (annualRate / 12) / 100;
+        const n = years * 12;
+
+        const totalInvestment = P * n;
+        // SIP Formula: M = P * [ ( (1 + i)^n - 1 ) / i ] * (1 + i)
+        let futureValue = 0;
+        if (i > 0) {
+            futureValue = P * ((Math.pow(1 + i, n) - 1) / i) * (1 + i);
+        } else {
+            futureValue = totalInvestment;
+        }
+
+        const estReturns = futureValue - totalInvestment;
+
+        // Update displays
+        calcInvested.textContent = '₹' + Math.round(totalInvestment).toLocaleString('en-IN');
+        calcReturns.textContent = '₹' + Math.round(estReturns).toLocaleString('en-IN');
+        calcTotal.textContent = '₹' + Math.round(futureValue).toLocaleString('en-IN');
+
+        // Percentages
+        const investedPct = (totalInvestment / futureValue) * 100;
+        const returnsPct = 100 - investedPct;
+
+        barInvestedPct.textContent = Math.round(investedPct) + '%';
+        barReturnsPct.textContent = Math.round(returnsPct) + '%';
+        barInvested.style.width = investedPct + '%';
+        barReturns.style.width = returnsPct + '%';
+
+        // Format values into Lakhs/Crores for text summary
+        const formatCurrencyWord = (val) => {
+            if (val >= 10000000) {
+                return (val / 10000000).toFixed(2) + ' Crore';
+            } else if (val >= 100000) {
+                return (val / 100000).toFixed(2) + ' Lakh';
+            } else {
+                return '₹' + Math.round(val).toLocaleString('en-IN');
+            }
+        };
+
+        calcSummary.innerHTML = `An investment of <strong class="text-blue dark:text-blue-light">${formatCurrencyWord(totalInvestment)}</strong> grows to <strong class="text-emerald">${formatCurrencyWord(futureValue)}</strong> over ${years} years!`;
+    }
+
+    // Add event listeners to calculator sliders
+    if (sipAmountInput && sipRateInput && sipYearsInput) {
+        [sipAmountInput, sipRateInput, sipYearsInput].forEach(slider => {
+            slider.addEventListener('input', calculateSIP);
+        });
+        calculateSIP();
+    }
+
+    // ── GALLERY DATA & PORTFOLIO LOGIC ──
+    const badgeStyles = {
+        blue: 'bg-blue/10 text-blue dark:bg-blue/20 dark:text-blue-light border border-blue/10 dark:border-blue/30',
+        emerald: 'bg-emerald/10 text-emerald dark:bg-emerald/20 dark:text-emerald-light border border-emerald/10 dark:border-emerald/30',
+        purple: 'bg-purple-500/10 text-purple-600 dark:bg-purple-500/20 dark:text-purple-300 border border-purple-500/10 dark:border-purple-500/30',
+        amber: 'bg-amber-500/10 text-amber-600 dark:bg-amber-500/20 dark:text-amber-300 border border-amber-500/10 dark:border-amber-500/30'
+    };
+
+    const galleryData = [
+      {
+        id: 1,
+        title: "The Cost of Delaying SIP",
+        category: "social-graphics",
+        categoryLabel: "Social Graphics",
+        badgeColor: "blue",
+        description: "An educational social media infographic demonstrating how starting a ₹5,000 monthly SIP at age 25 vs. age 35 affects your long-term wealth accumulation by age 60.",
+        previewHtml: `
+          <div class="aspect-video w-full rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200/50 dark:from-slate-800 dark:to-navy-800 border border-slate-200/10 flex flex-col justify-between p-4 relative overflow-hidden text-left shadow-sm">
+            <div class="absolute -right-10 -top-10 w-24 h-24 bg-blue/10 rounded-full blur-xl"></div>
+            <div class="flex justify-between items-start z-10">
+              <span class="text-[9px] uppercase tracking-wider font-display font-800 text-blue bg-blue/10 px-2 py-0.5 rounded-md">SIP Awareness</span>
+              <span class="text-[9px] font-display font-700 text-slate-400">Post #12</span>
+            </div>
+            <div class="z-10 py-1">
+              <p class="text-slate-900 dark:text-white font-display font-800 text-sm sm:text-base leading-tight">The Cost of Delay</p>
+              <p class="text-slate-500 dark:text-slate-400 text-[10px] mt-1">Starting 10 years late can shrink your final corpus by 65%.</p>
+            </div>
+            <div class="flex justify-between items-center z-10 pt-2 border-t border-slate-300/20 dark:border-slate-700/20">
+              <div>
+                <p class="text-[9px] text-slate-550 dark:text-slate-500 uppercase">SIP ₹5,000/mo at 12%</p>
+                <p class="text-slate-900 dark:text-white font-display font-800 text-[11px]">₹1.76 Cr (Age 25) vs ₹56 L (Age 35)</p>
+              </div>
+              <span class="text-[9px] font-display font-700 text-rose-500 bg-rose-500/10 px-1.5 py-0.5 rounded">-₹1.2 Crore</span>
+            </div>
+          </div>
+        `,
+        templateText: "Delaying your SIP even by a few years can cost you lakhs. Time in the market is way more important than timing the market. ⏳📈 Here's how starting at 25 vs 35 looks:\n\n• Age 25: ₹5,000/mo -> ₹1.76 Crore at 60\n• Age 35: ₹5,000/mo -> ₹56 Lakhs at 60\n\nSame contribution rate, but a ₹1.2 Crore wealth gap! Don't wait. Start your SIP today. Send a DM or comment 'START' to plan your retirement roadmap!\n\n#investingbasics #sip #compounding #financialfreedom #mfd"
+      },
+      {
+        id: 2,
+        title: "SIP vs Lumpsum Averaging",
+        category: "social-graphics",
+        categoryLabel: "Social Graphics",
+        badgeColor: "blue",
+        description: "A comparison chart highlighting how SIP averaging beats attempting to time the market with lumpsum investments.",
+        previewHtml: `
+          <div class="aspect-video w-full rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200/50 dark:from-slate-800 dark:to-navy-800 border border-slate-200/10 flex flex-col justify-between p-4 relative overflow-hidden text-left shadow-sm">
+            <div class="absolute -left-10 -bottom-10 w-24 h-24 bg-emerald/10 rounded-full blur-xl"></div>
+            <div class="flex justify-between items-start z-10">
+              <span class="text-[9px] uppercase tracking-wider font-display font-800 text-emerald bg-emerald/10 px-2 py-0.5 rounded-md">Market Timing</span>
+              <span class="text-[9px] font-display font-700 text-slate-400">Post #15</span>
+            </div>
+            <div class="z-10 py-1">
+              <p class="text-slate-900 dark:text-white font-display font-800 text-sm sm:text-base leading-tight">SIP vs Lumpsum</p>
+              <p class="text-slate-500 dark:text-slate-400 text-[10px] mt-1">Rupee Cost Averaging handles volatility automatically.</p>
+            </div>
+            <div class="flex justify-between items-center z-10 pt-2 border-t border-slate-300/20 dark:border-slate-700/20">
+              <div>
+                <p class="text-[9px] text-slate-500 uppercase">During Market Dip</p>
+                <p class="text-slate-900 dark:text-white font-display font-800 text-[11px]">SIP buys more units, Lumpsum feels the pinch</p>
+              </div>
+              <span class="text-[9px] font-display font-700 text-emerald bg-emerald-500/10 px-1.5 py-0.5 rounded">Averaging Benefit</span>
+            </div>
+          </div>
+        `,
+        templateText: "Trying to time the market is a losing game. 📉 VS 📈\n\nWhen the market falls, your SIP buys MORE units at cheaper prices. When the market goes up, your portfolio value rises. That is the beauty of Rupee Cost Averaging!\n\nStop waiting for the 'perfect' time. The perfect time is now. Message us to learn how to set up your automatic monthly wealth builder.\n\n#mutualfunds #investmenttips #wealthcreators #sipindia #rupeecostaveraging"
+      },
+      {
+        id: 3,
+        title: "3 Myths About Mutual Funds",
+        category: "reel-scripts",
+        categoryLabel: "Reel Script",
+        badgeColor: "emerald",
+        description: "A fast-paced video script hook to capture audience attention and debunk common investing misconceptions in under 30 seconds.",
+        previewHtml: `
+          <div class="aspect-video w-full rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200/50 dark:from-slate-800 dark:to-navy-800 border border-slate-200/10 flex flex-col justify-between p-4 relative overflow-hidden text-left shadow-sm">
+            <div class="absolute inset-0 bg-slate-950/45 z-10 flex items-center justify-center rounded-2xl">
+              <div class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="text-blue ml-0.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+            <div class="flex justify-between items-start z-20">
+              <span class="text-[9px] uppercase tracking-wider font-display font-800 text-rose-500 bg-rose-500/15 px-2 py-0.5 rounded-md">Hook Script</span>
+              <span class="text-[9px] font-display font-700 text-white">30s Duration</span>
+            </div>
+            <div class="z-20">
+              <p class="text-white font-display font-800 text-sm leading-tight">"Mutual funds are only for the rich..."</p>
+              <p class="text-white/80 text-[10px] mt-1">Debunking three classic myths on camera.</p>
+            </div>
+          </div>
+        `,
+        templateText: "🎬 [0-5s] HOOK:\n\"Think you need lakhs to start investing in mutual funds? Think again.\"\n\n📊 [5-20s] BODY:\nHere are 3 quick myths busted:\n1. Myth: You need big money. Reality: You can start with just ₹500/month!\n2. Myth: It's too risky. Reality: Diversification across 50+ stocks lowers your risk.\n3. Myth: Lock-in periods. Reality: Open-ended funds let you withdraw money anytime!\n\n📢 [20-30s] CALL TO ACTION:\n\"Ready to start your ₹500 wealth engine? Comment 'MYTH' below and I will send you our Beginner's Starter Pack!\""
+      },
+      {
+        id: 4,
+        title: "Tax Saving Secrets (ELSS)",
+        category: "reel-scripts",
+        categoryLabel: "Reel Script",
+        badgeColor: "emerald",
+        description: "Camera script highlighting ELSS tax savings under Section 80C, explaining its superiority over traditional options like PPF or FDs.",
+        previewHtml: `
+          <div class="aspect-video w-full rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200/50 dark:from-slate-800 dark:to-navy-800 border border-slate-200/10 flex flex-col justify-between p-4 relative overflow-hidden text-left shadow-sm">
+            <div class="absolute inset-0 bg-slate-950/45 z-10 flex items-center justify-center rounded-2xl">
+              <div class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="text-blue ml-0.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+            <div class="flex justify-between items-start z-20">
+              <span class="text-[9px] uppercase tracking-wider font-display font-800 text-amber-500 bg-amber-500/15 px-2 py-0.5 rounded-md">ELSS / Tax</span>
+              <span class="text-[9px] font-display font-700 text-white">25s Duration</span>
+            </div>
+            <div class="z-20">
+              <p class="text-white font-display font-800 text-sm leading-tight">Tax-Saving Mutual Funds</p>
+              <p class="text-white/80 text-[10px] mt-1">Save tax and beat inflation with the shortest lock-in.</p>
+            </div>
+          </div>
+        `,
+        templateText: "🎬 [0-5s] HOOK:\n\"Stop letting inflation eat your tax savings!\"\n\n📊 [5-20s] BODY:\nTraditional tax savers like PPF or FDs lock your money for 5 to 15 years, and often fail to beat inflation. Enter ELSS - Tax Saving Mutual Funds. \n• Shortest lock-in of only 3 years.\n• Direct equity exposure for higher potential returns.\n• Saves up to ₹46,800 under Section 80C.\n\n📢 [20-30s] CALL TO ACTION:\n\"Want to save tax and grow wealth at the same time? Comment 'TAX' and let's map out your ELSS allocations for this financial year!\""
+      },
+      {
+        id: 5,
+        title: "Market Volatility Note",
+        category: "broadcasts",
+        categoryLabel: "WhatsApp Broadcast",
+        badgeColor: "purple",
+        description: "Reassurance text template for WhatsApp lists when the stock market goes down, ensuring clients don't panic-sell.",
+        previewHtml: `
+          <div class="aspect-video w-full rounded-2xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-500/10 flex flex-col justify-between p-4 relative text-left shadow-sm">
+            <div class="flex items-center gap-1.5 border-b border-emerald-500/10 pb-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald"></span>
+              <span class="text-[9px] font-display font-800 text-emerald">WhatsApp Broadcast</span>
+            </div>
+            <div class="text-[9px] text-slate-700 dark:text-slate-350 leading-tight space-y-1 py-1">
+              <p class="font-semibold">"Is the market crash scary? 📉"</p>
+              <p>Keep calm! Market corrections are normal buying opportunities...</p>
+            </div>
+            <div class="text-[8px] text-slate-450 dark:text-slate-500 border-t border-slate-300/10 pt-1.5 flex justify-between">
+              <span>Ready-to-send broadcast</span>
+              <span>100% compliance safe</span>
+            </div>
+          </div>
+        `,
+        templateText: "Dear Investor, 👋\n\nSeeing red in your portfolio during market volatility? It is natural to feel anxious, but here is what history teaches us:\n\n1. Market corrections are normal: Temporary dips are healthy cycles of long-term growth.\n2. Do not stop SIPs: Dips let you accumulate more mutual fund units at lower NAVs. It is like a clearance sale!\n3. Stay focused on your goals: Keep your retirement, children's education, or house fund objectives in focus. \n\nAvoid making emotional decisions. If you feel like redeeming your investments, let's hop on a quick call first to review your portfolio risk profile. We are here to support you! \n\nBest regards,\n[Your Name/Practice Team]"
+      },
+      {
+        id: 6,
+        title: "SIP Top-up Reminder",
+        category: "broadcasts",
+        categoryLabel: "WhatsApp Broadcast",
+        badgeColor: "purple",
+        description: "A broadcast script reminding clients to increase their SIP contribution by 10% annually, showing the dramatic difference it makes.",
+        previewHtml: `
+          <div class="aspect-video w-full rounded-2xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-500/10 flex flex-col justify-between p-4 relative text-left shadow-sm">
+            <div class="flex items-center gap-1.5 border-b border-emerald-500/10 pb-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald"></span>
+              <span class="text-[9px] font-display font-800 text-emerald">WhatsApp Broadcast</span>
+            </div>
+            <div class="text-[9px] text-slate-700 dark:text-slate-350 leading-tight space-y-1 py-1">
+              <p class="font-semibold">"Increase your SIP by just 10% 📈"</p>
+              <p>Adding a small top-up can double your final wealth value...</p>
+            </div>
+            <div class="text-[8px] text-slate-450 dark:text-slate-500 border-t border-slate-300/10 pt-1.5 flex justify-between">
+              <span>Client update template</span>
+              <span>Focuses on top-up benefit</span>
+            </div>
+          </div>
+        `,
+        templateText: "Hi there! 👋\n\nDid you know that matching your investment growth with your annual salary hike can double your wealth? 🚀\n\nHere's the magic of a *10% Annual SIP Top-up* on a ₹10,000 monthly investment:\n\n• Normal SIP (20 yrs): Invest ₹24L -> Value: *~₹99.9 Lakhs*\n• Top-up SIP (20 yrs): Invest ₹57L -> Value: *~₹1.83 Crore*\n\nBy just increasing your SIP by ₹1,000 next month (and 10% every year), you could add an extra ₹83 Lakhs to your retirement pool! \n\nReply 'TOPUP' to this message, and we'll quickly process the step-up command for your existing folio. \n\nWarm regards,\n[Your Practice Name]"
+      },
+      {
+        id: 7,
+        title: "Retirement Blueprint PDF",
+        category: "guides",
+        categoryLabel: "PDF Guide Outline",
+        badgeColor: "amber",
+        description: "A comprehensive PDF guide structure for MFDs to distribute to high-net-worth clients planning their golden years.",
+        previewHtml: `
+          <div class="aspect-video w-full rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200/50 dark:from-slate-800 dark:to-navy-800 border border-slate-200/10 flex flex-col justify-between p-4 relative overflow-hidden text-left shadow-sm">
+            <div class="absolute -right-6 -bottom-6 w-20 h-20 bg-amber-500/10 rounded-full blur-lg"></div>
+            <div class="flex justify-between items-start z-10">
+              <span class="text-[9px] uppercase tracking-wider font-display font-800 text-amber-500 bg-amber-500/15 px-2 py-0.5 rounded-md">Lead Magnet</span>
+              <span class="text-[9px] font-display font-700 text-slate-400">PDF Guide</span>
+            </div>
+            <div class="z-10 py-1">
+              <p class="text-slate-900 dark:text-white font-display font-800 text-sm leading-tight">Retirement Blueprint</p>
+              <p class="text-slate-500 dark:text-slate-400 text-[10px] mt-1">Equity/Debt allocations and Post-Retirement income plans.</p>
+            </div>
+            <div class="flex justify-between items-center z-10 pt-1.5 border-t border-slate-300/20 dark:border-slate-700/20">
+              <span class="text-[9px] text-slate-550 dark:text-slate-400">8 Pages • Brandable</span>
+              <span class="text-[9px] font-display font-700 text-amber-500">SWP Scheme</span>
+            </div>
+          </div>
+        `,
+        templateText: "📖 RETIREMENT BLUEPRINT - PDF GUIDE STRUCTURE:\n\nPage 1: Title Cover (Your Logo & Subtitle)\nPage 2: The Core Challenge: Inflation vs Fixed Returns. Why traditional saving instruments leave you poor in your 70s.\nPage 3: Calculating your Retirement Number: Multiplier formula based on current annual expenses.\nPage 4: Asset Allocation Strategy: Diversifying wealth between growth (Equities) and stability (Debt/Arbitrage).\nPage 5: Systemic Withdrawal Plan (SWP): The tax-efficient way to generate monthly cash flows without eroding capital.\nPage 6: Healthcare & Emergency reserves setup.\nPage 7: Worksheet/Checklist: Step-by-step roadmap.\nPage 8: Call to Action: Schedule a custom retirement plan review with [Your Practice Name]."
+      },
+      {
+        id: 8,
+        title: "First-Time Investor Checklist",
+        category: "guides",
+        categoryLabel: "PDF Guide Outline",
+        badgeColor: "amber",
+        description: "A brandable onboarding PDF brochure designed for new investors, outlining KYC requirements and risk profiling basics.",
+        previewHtml: `
+          <div class="aspect-video w-full rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200/50 dark:from-slate-800 dark:to-navy-800 border border-slate-200/10 flex flex-col justify-between p-4 relative overflow-hidden text-left shadow-sm">
+            <div class="absolute -right-6 -bottom-6 w-20 h-20 bg-amber-500/10 rounded-full blur-lg"></div>
+            <div class="flex justify-between items-start z-10">
+              <span class="text-[9px] uppercase tracking-wider font-display font-800 text-amber-500 bg-amber-500/15 px-2 py-0.5 rounded-md">Onboarding Asset</span>
+              <span class="text-[9px] font-display font-700 text-slate-400">PDF Guide</span>
+            </div>
+            <div class="z-10 py-1">
+              <p class="text-slate-900 dark:text-white font-display font-800 text-sm leading-tight">First-Time Investor Guide</p>
+              <p class="text-slate-500 dark:text-slate-400 text-[10px] mt-1">Simple guide explaining PAN KYC, bank linkage, and risk profiles.</p>
+            </div>
+            <div class="flex justify-between items-center z-10 pt-1.5 border-t border-slate-300/20 dark:border-slate-700/20">
+              <span class="text-[9px] text-slate-550 dark:text-slate-400">4 Pages • Easy Copy</span>
+              <span class="text-[9px] font-display font-700 text-amber-500">KYC Ready</span>
+            </div>
+          </div>
+        `,
+        templateText: "📖 FIRST-TIME INVESTOR CHECKLIST - PDF OUTLINE:\n\nPage 1: Subtitle: \"Your First Step to Financial Freedom - Made Simple\"\nPage 2: Pre-Requisites Checklist:\n   • PAN Card (Mandatory)\n   • Aadhaar card linked to active mobile number\n   • Bank Account details (Cancelled Cheque/Statement)\nPage 3: The KYC Process (Know Your Customer) - Online vs Offline validation steps.\nPage 4: Risk Profiling Checklist: 5 simple questions to determine if you are Conservative, Balanced, or Aggressive.\nPage 5: Setting Up Your First SIP: Selecting dates, enabling auto-debit, and tracking your investments.\nPage 6: Contact details to request assistance with KYC registration."
+      }
+    ];
+
+    function renderGallery(category) {
+        const grid = document.getElementById('gallery-grid');
+        if (!grid) return;
+        
+        grid.innerHTML = '';
+        const filtered = category === 'all' 
+            ? galleryData 
+            : galleryData.filter(item => item.category === category);
+            
+        filtered.forEach(item => {
+            const card = document.createElement('div');
+            card.className = "feature-card glass rounded-3xl p-5 border border-slate-200/10 hover:border-blue/20 flex flex-col justify-between gap-4 cursor-pointer";
+            card.setAttribute('onclick', `openGalleryModal(${item.id})`);
+            card.innerHTML = `
+              <div>
+                <!-- Mockup preview -->
+                <div class="mb-4">
+                  ${item.previewHtml}
+                </div>
+                <span class="text-[9px] font-display font-800 px-2.5 py-1 rounded-md ${badgeStyles[item.badgeColor]}">${item.categoryLabel}</span>
+                <h3 class="font-display font-700 text-slate-900 dark:text-white text-base mt-2 mb-1.5">${item.title}</h3>
+                <p class="text-slate-550 dark:text-slate-450 text-xs leading-relaxed line-clamp-2">${item.description}</p>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-slate-200/10">
+                <span class="text-xs font-display font-600 text-blue dark:text-blue-light flex items-center gap-1.5">
+                  View Template
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                </span>
+              </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    function filterGallery(category) {
+        // Toggle active button style
+        const categories = ['all', 'social-graphics', 'reel-scripts', 'broadcasts', 'guides'];
+        categories.forEach(cat => {
+            const btn = document.getElementById(`filter-btn-${cat}`);
+            if (btn) {
+                if (cat === category) {
+                    btn.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-display font-600 transition-all duration-300 bg-blue text-white shadow-md shadow-blue/20";
+                } else {
+                    btn.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-display font-600 transition-all duration-300 bg-white dark:bg-navy-800 text-slate-600 dark:text-slate-300 border border-slate-200/20 hover:border-blue/50";
+                }
+            }
+        });
+        
+        renderGallery(category);
+    }
+
+    let activeModalContent = '';
+
+    function openGalleryModal(id) {
+        const item = galleryData.find(d => d.id === id);
+        if (!item) return;
+
+        const modal = document.getElementById('gallery-modal');
+        const card = document.getElementById('modal-content-card');
+        const badge = document.getElementById('modal-badge');
+        const title = document.getElementById('modal-title');
+        const previewContainer = document.getElementById('modal-preview-container');
+        const desc = document.getElementById('modal-description');
+        const textContent = document.getElementById('modal-content-text');
+
+        // Populate elements
+        badge.textContent = item.categoryLabel;
+        badge.className = `text-[10px] uppercase tracking-wider font-display font-800 px-2.5 py-1 rounded-md ${badgeStyles[item.badgeColor]}`;
+        title.textContent = item.title;
+        desc.textContent = item.description;
+        previewContainer.innerHTML = item.previewHtml;
+        textContent.textContent = item.templateText;
+        activeModalContent = item.templateText;
+
+        // Reset copy button status
+        const copyBtnText = document.getElementById('copy-btn-text');
+        const copyBtnIcon = document.getElementById('copy-btn-icon');
+        if (copyBtnText) copyBtnText.textContent = "Copy Template Text";
+        if (copyBtnIcon) {
+            copyBtnIcon.innerHTML = `<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>`;
+        }
+
+        // Show modal with animations
+        modal.classList.remove('hidden');
+        // Force reflow
+        void card.offsetWidth;
+        card.classList.remove('scale-95', 'opacity-0');
+        card.classList.add('scale-100', 'opacity-100');
+        
+        // Scroll lock
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeGalleryModal() {
+        const modal = document.getElementById('gallery-modal');
+        const card = document.getElementById('modal-content-card');
+        
+        card.classList.remove('scale-100', 'opacity-100');
+        card.classList.add('scale-95', 'opacity-0');
+        
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            // Release scroll lock
+            document.body.style.overflow = '';
+        }, 300);
+    }
+
+    function copyModalContent() {
+        if (!activeModalContent) return;
+        
+        navigator.clipboard.writeText(activeModalContent).then(() => {
+            const copyBtnText = document.getElementById('copy-btn-text');
+            const copyBtnIcon = document.getElementById('copy-btn-icon');
+            
+            if (copyBtnText) copyBtnText.textContent = "Copied!";
+            if (copyBtnIcon) {
+                // Checkmark SVG inside copy icon
+                copyBtnIcon.innerHTML = `<polyline points="20 6 9 17 4 12"></polyline>`;
+            }
+            
+            setTimeout(() => {
+                if (copyBtnText) copyBtnText.textContent = "Copy Template Text";
+                if (copyBtnIcon) {
+                    copyBtnIcon.innerHTML = `<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>`;
+                }
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+Welcome Greetings {name}!
+
+Thank you for reaching out to us. We have successfully received your details.
+Our team will connect back with you in 48 to 72 hours.
+
+Thanks and Regards,
+MFD-DOST

@@ -1,0 +1,9 @@
+You have received a new contact form submission.
+
+Name: {name}
+Email: {email}
+Mobile: {mobile}
+Business: {business}
+
+Message:
+{message}

@@ -204,7 +204,24 @@ scheduler.start()
 def index():
     whatsapp_clean = WHATSAPP_NUMBER.replace('+', '').replace(' ', '').replace('-', '')
     telegram_clean = TELEGRAM_USERNAME.replace('@', '')
-    return render_template('index.html', whatsapp_number=whatsapp_clean, telegram_username=telegram_clean)
+    telegram_url = telegram_clean if telegram_clean.startswith('http') else 'https://' + telegram_clean
+    linkedin_profile = os.environ.get("LINKEDIN_PROFILE", "")
+    
+    fb_raw = os.environ.get("FACEBOOK_PROFILE", "")
+    fb_url = fb_raw if fb_raw.startswith('http') else f"https://www.facebook.com/{fb_raw}" if fb_raw else ""
+    
+    ig_raw = os.environ.get("INSTAGRAM_PROFILE", "")
+    ig_url = ig_raw if ig_raw.startswith('http') else f"https://www.instagram.com/{ig_raw}" if ig_raw else ""
+
+    app_email = os.environ.get("APP_EMAIL", ADMIN_EMAIL)
+
+    return render_template('index.html', 
+                           whatsapp_number=whatsapp_clean, 
+                           telegram_url=telegram_url, 
+                           linkedin_profile=linkedin_profile, 
+                           facebook_url=fb_url,
+                           instagram_url=ig_url,
+                           app_email=app_email)
 
 @app.route('/api/contact', methods=['POST'])
 def contact():

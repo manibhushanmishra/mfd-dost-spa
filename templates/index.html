@@ -593,6 +593,26 @@
       transition: width 0.1s linear;
     }
 
+    .mesh-bg {
+      background-color: #f8fafc;
+      background-image: radial-gradient(at 0% 0%, hsla(210, 100%, 95%, 1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(213, 100%, 92%, 1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(220, 100%, 95%, 1) 0, transparent 50%);
+    }
+
+    .dark .mesh-bg {
+      background-color: #0B1121;
+      background-image: radial-gradient(at 0% 0%, hsla(220, 40%, 15%, 1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(222, 50%, 10%, 1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(210, 40%, 15%, 1) 0, transparent 50%);
+    }
+    
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .hide-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+
     /* ── HERO GRID BG ── */
     .hero-grid {
       background-image:
@@ -855,10 +875,13 @@
 
           <!-- Tab Content Container -->
           <div
-            class="glass rounded-3xl p-5 min-h-[360px] flex flex-col justify-between relative overflow-hidden shadow-xl shadow-slate-200/40 dark:shadow-none">
+            class="glass rounded-3xl p-5 h-[520px] sm:h-[500px] flex flex-col relative overflow-hidden shadow-xl shadow-slate-200/40 dark:shadow-none">
+
+            <!-- Scrollable Content Area -->
+            <div class="flex-1 overflow-y-auto pr-2 pb-2 hide-scrollbar">
 
             <!-- Dynamic Tab: Social Media Post -->
-            <div id="hero-tab-social" class="space-y-4 tab-content-item transition-all duration-300 opacity-100">
+            <div id="hero-tab-social" class="h-full flex flex-col space-y-4 tab-content-item transition-all duration-300 opacity-100">
               <!-- Instagram Header Mockup -->
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2.5">
@@ -882,7 +905,7 @@
 
               <!-- Post Graphic Mockup -->
               <div id="mockup-graphic-bg"
-                class="aspect-video w-full rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200/50 dark:from-slate-800 dark:to-navy-800 border border-slate-200/10 flex flex-col justify-between p-4 relative overflow-hidden group">
+                class="h-[260px] w-full rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200/50 dark:from-slate-800 dark:to-navy-800 border border-slate-200/10 flex flex-col justify-between p-4 relative overflow-hidden group">
                 <div id="mockup-overlay-decor-1"
                   class="absolute -right-10 -top-10 w-28 h-28 bg-emerald/10 dark:bg-emerald/20 rounded-full blur-xl">
                 </div>
@@ -947,7 +970,7 @@
               </div>
 
               <!-- Caption -->
-              <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+              <p class="mt-auto text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
                 <span class="font-display font-800 text-slate-900 dark:text-white mr-1.5">your_practice_mfd</span><span
                   id="mockup-post-caption">Delaying your SIP even by a few years can cost you lakhs. Time in the market
                   is way more important than timing the market. ⏳📈 #investingbasics #sip #compounding</span>
@@ -955,7 +978,7 @@
             </div>
 
             <!-- Dynamic Tab: Reel Script (Hidden by default) -->
-            <div id="hero-tab-reel" class="space-y-4 tab-content-item hidden opacity-0 transition-all duration-300">
+            <div id="hero-tab-reel" class="h-full flex flex-col space-y-4 tab-content-item hidden opacity-0 transition-all duration-300">
               <div class="flex items-center justify-between border-b border-slate-200/10 pb-2">
                 <div class="flex items-center gap-2">
                   <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></span>
@@ -997,14 +1020,14 @@
                 </div>
               </div>
 
-              <div class="flex items-center gap-2 pt-2 border-t border-slate-200/10">
+              <div class="mt-auto flex items-center gap-2 pt-2 border-t border-slate-200/10">
                 <span class="text-[9px] text-slate-400">Prompt: "Copy and record. Perfect for Instagram Reels or YouTube
                   Shorts."</span>
               </div>
             </div>
 
             <!-- Dynamic Tab: WhatsApp Broadcast (Hidden by default) -->
-            <div id="hero-tab-whatsapp" class="space-y-4 tab-content-item hidden opacity-0 transition-all duration-300">
+            <div id="hero-tab-whatsapp" class="h-full flex flex-col space-y-4 tab-content-item hidden opacity-0 transition-all duration-300">
               <div class="flex items-center justify-between border-b border-slate-200/10 pb-2">
                 <div class="flex items-center gap-2">
                   <div class="w-6 h-6 rounded-full bg-emerald flex items-center justify-center text-white">
@@ -1041,16 +1064,17 @@
                 </div>
               </div>
 
-              <div class="flex items-center justify-between text-[10px] text-slate-400">
+              <div class="mt-auto flex items-center justify-between text-[10px] text-slate-400">
                 <span>Copy text & send to lists</span>
                 <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald"></span> Ready to
                   send</span>
               </div>
             </div>
 
+            </div>
 
             <!-- Bottom Note -->
-            <div class="mt-4 pt-3 border-t border-slate-200/10 flex items-center justify-between">
+            <div class="mt-4 pt-3 border-t border-slate-200/10 flex items-center justify-between shrink-0">
               <span class="text-[10px] text-slate-500 dark:text-slate-400">Professional digital presence in
                 minutes</span>
               <span class="text-[10px] font-display font-700 text-blue">MFD-Dost</span>
@@ -1060,7 +1084,7 @@
 
           <!-- Floating badges -->
           <div
-            class="absolute -top-4 -right-4 glass rounded-2xl px-3.5 py-2.5 hidden sm:flex items-center gap-2 dash-card"
+            class="absolute top-14 -right-4 glass rounded-2xl px-3.5 py-2.5 hidden sm:flex items-center gap-2 dash-card"
             style="animation-delay:-0.8s">
             <div class="w-7 h-7 rounded-xl flex items-center justify-center bg-emerald/10 text-emerald">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"

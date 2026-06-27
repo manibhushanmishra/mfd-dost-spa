@@ -74,129 +74,199 @@ def send_email(to_email, subject, body):
         print(f"SMTP Error: {str(e)}")
         return False, str(e)
 
-def log_to_failed_file(contact_data, error_msg):
+def get_file_paths():
     today = datetime.now().strftime('%Y_%m_%d')
-    failed_filepath = os.path.join(DATA_DIR, f'contacts_{today}_failed.json')
-    
-    failed_data = []
-    if os.path.exists(failed_filepath):
+    base = os.path.join(DATA_DIR, f'contacts_{today}.json')
+    failed = os.path.join(DATA_DIR, f'contacts_{today}_failed.json')
+    final_failed = os.path.join(DATA_DIR, f'final_failed_contacts_{today}.json')
+    return base, failed, final_failed
+
+def load_json(filepath):
+    if not os.path.exists(filepath):
+        return []
+    with open(filepath, 'r') as f:
         try:
-            with open(failed_filepath, 'r') as f:
-                failed_data = json.load(f)
+            return json.load(f)
         except json.JSONDecodeError:
-            pass
-            
-    log_entry = {
-        "timestamp": datetime.now().isoformat(),
-        "error": error_msg,
-        "contact_data": contact_data
-    }
-    failed_data.append(log_entry)
-    
-    with open(failed_filepath, 'w') as f:
-        json.dump(failed_data, f, indent=4)
+            return []
 
-def do_process_contacts(is_retry=False):
-    job_type = "Retry job" if is_retry else "Daily job"
-    print(f"[{datetime.now()}] Running {job_type} to process contacts...")
-    filepath = get_todays_file()
-    contacts = get_contacts(filepath)
-    
-    if not contacts:
-        return
+def save_json(filepath, data):
+    if not os.path.exists(DATA_DIR):
+        os.makedirs(DATA_DIR)
+    with open(filepath, 'w') as f:
+        json.dump(data, f, indent=4)
 
+def attempt_send_contact(contact, admin_template, user_template):
+    """Attempts to send emails for a contact. Returns (success_bool, errors_list)"""
+    name = contact.get('name', 'User')
+    email = contact.get('email', 'unknown')
+    mobile = contact.get('mobile', '')
+    business = contact.get('business', '')
+    message = contact.get('message', '')
+
+    admin_body = admin_template.format(name=name, email=email, mobile=mobile, business=business, message=message)
+    user_body = user_template.format(name=name)
+
+    admin_sent = contact.get('admin_email_sent', False)
+    user_sent = contact.get('user_email_sent', False)
+    
+    errors = []
+
+    # 1. Send Admin Email
+    if not admin_sent:
+        print(f"Processing Admin Email to {ADMIN_EMAIL}")
+        success_admin, err_admin = send_email(ADMIN_EMAIL, f"New Contact: {name}", admin_body)
+        if success_admin:
+            contact['admin_email_sent'] = True
+        else:
+            errors.append(f"Admin Email Failed: {err_admin}")
+
+    # 2. Send User Email
+    if not user_sent and email and email != 'unknown':
+        print(f"Processing User Welcome Email to {email}")
+        success_user, err_user = send_email(email, "Welcome to MFD-DOST - We have received your details!", user_body)
+        if success_user:
+            contact['user_email_sent'] = True
+        else:
+            errors.append(f"User Email Failed: {err_user}")
+    elif email == 'unknown' or not email:
+        contact['user_email_sent'] = True
+
+    # 3. Trigger Mock SMS
+    if not contact.get('sms_sent', False):
+        print(f"[MSG_SERVICE] Sending SMS to ADMIN: {ADMIN_MOBILE}")
+        contact['sms_sent'] = True
+
+    success = len(errors) == 0
+    if success:
+        contact['processed'] = True
+    return success, errors
+
+def get_templates():
     base_dir = os.path.dirname(__file__)
     try:
         with open(os.path.join(base_dir, 'templates/admin_notification.txt'), 'r') as f:
             admin_template = f.read()
         with open(os.path.join(base_dir, 'templates/user_welcome.txt'), 'r') as f:
             user_template = f.read()
+        return admin_template, user_template
     except Exception as e:
         print(f"Error loading templates: {e}")
-        return
+        return None, None
 
-    updated_contacts = []
+def process_new_contacts():
+    print(f"[{datetime.now()}] Running 6:00 PM Job: process_new_contacts")
+    base_path, failed_path, _ = get_file_paths()
+    contacts = load_json(base_path)
+    if not contacts:
+        return
+        
+    admin_tpl, user_tpl = get_templates()
+    if not admin_tpl: return
+
+    kept_contacts = []
+    new_failed_contacts = []
     changes_made = False
-    
+
     for contact in contacts:
         if contact.get('processed'):
-            updated_contacts.append(contact)
+            kept_contacts.append(contact)
             continue
             
-        retry_count = contact.get('retry_count', 0)
-        
-        if is_retry:
-            # Retry job only processes failed contacts that haven't reached max retries (3)
-            if retry_count == 0 or retry_count >= 3:
-                updated_contacts.append(contact)
-                continue
-        else:
-            # Daily job only processes new contacts
-            if retry_count > 0:
-                updated_contacts.append(contact)
-                continue
-
         changes_made = True
-        name = contact.get('name', 'User')
-        email = contact.get('email', 'unknown')
-        mobile = contact.get('mobile', '')
-        business = contact.get('business', '')
-        message = contact.get('message', '')
-
-        admin_body = admin_template.format(name=name, email=email, mobile=mobile, business=business, message=message)
-        user_body = user_template.format(name=name)
-
-        admin_sent = contact.get('admin_email_sent', False)
-        user_sent = contact.get('user_email_sent', False)
+        success = False
         
-        errors = []
-
-        # 1. Send Admin Email
-        if not admin_sent:
-            print(f"Processing Admin Email to {ADMIN_EMAIL}")
-            success_admin, err_admin = send_email(ADMIN_EMAIL, f"New Contact: {name}", admin_body)
-            if success_admin:
-                contact['admin_email_sent'] = True
-            else:
-                errors.append(f"Admin Email Failed: {err_admin}")
-
-        # 2. Send User Email
-        if not user_sent and email and email != 'unknown':
-            print(f"Processing User Welcome Email to {email}")
-            success_user, err_user = send_email(email, "Welcome to MFD-DOST - We have received your details!", user_body)
-            if success_user:
-                contact['user_email_sent'] = True
-            else:
-                errors.append(f"User Email Failed: {err_user}")
-        elif email == 'unknown' or not email:
-            contact['user_email_sent'] = True
-
-        # 3. Trigger Mock SMS
-        if not contact.get('sms_sent', False):
-            print(f"[MSG_SERVICE] Sending SMS to ADMIN: {ADMIN_MOBILE}")
-            print(f"[MSG_SERVICE] Content: New lead: {name} has contacted you via the website.")
-            contact['sms_sent'] = True
-            
-        if not errors:
-            contact['processed'] = True
+        # Try up to 3 times synchronously
+        for attempt in range(3):
+            success, errors = attempt_send_contact(contact, admin_tpl, user_tpl)
+            if success:
+                break
+                
+        if success:
+            # attempt starts at 0, so if it succeeds immediately, retry_count is 0
+            # attempt 1 -> retry_count 1
+            # attempt 2 -> retry_count 2
+            contact['retry_count'] = attempt
+            kept_contacts.append(contact)
         else:
-            contact['retry_count'] = retry_count + 1
-            error_msg = "; ".join(errors)
-            log_to_failed_file(contact, error_msg)
-            
-        updated_contacts.append(contact)
+            # Failed 3 times (attempts 0, 1, 2)
+            contact['retry_count'] = 3
+            contact['last_error'] = "; ".join(errors)
+            new_failed_contacts.append(contact)
 
     if changes_made:
-        with open(filepath, 'w') as f:
-            json.dump(updated_contacts, f, indent=4)
-        print(f"[{datetime.now()}] {job_type} completed. Changes saved.")
+        save_json(base_path, kept_contacts)
+        if new_failed_contacts:
+            existing_failed = load_json(failed_path)
+            existing_failed.extend(new_failed_contacts)
+            save_json(failed_path, existing_failed)
+        print(f"[{datetime.now()}] 6:00 PM Job completed. Changes saved.")
+
+def process_failed_contacts():
+    print(f"[{datetime.now()}] Running 6:30 PM Job: process_failed_contacts")
+    base_path, failed_path, final_failed_path = get_file_paths()
+    failed_contacts = load_json(failed_path)
+    
+    if not failed_contacts:
+        return
+        
+    admin_tpl, user_tpl = get_templates()
+    if not admin_tpl: return
+
+    kept_failed_contacts = []
+    recovered_contacts = []
+    new_final_failed_contacts = []
+    changes_made = False
+
+    for contact in failed_contacts:
+        if contact.get('processed'):
+            recovered_contacts.append(contact)
+            changes_made = True
+            continue
+            
+        changes_made = True
+        success = False
+        
+        # Try up to 3 times synchronously
+        for attempt in range(3):
+            success, errors = attempt_send_contact(contact, admin_tpl, user_tpl)
+            if success:
+                break
+                
+        if success:
+            # 1st attempt of 2nd job -> 4
+            # 2nd attempt of 2nd job -> 5
+            # 3rd attempt of 2nd job -> 6
+            contact['retry_count'] = 4 + attempt
+            recovered_contacts.append(contact)
+        else:
+            # Failed all 3 times in 2nd job (6 total)
+            contact['retry_count'] = 6
+            contact['last_error'] = "; ".join(errors)
+            new_final_failed_contacts.append(contact)
+
+    if changes_made:
+        # Clear out processed/failed contacts from the failed file
+        save_json(failed_path, kept_failed_contacts)
+        
+        if recovered_contacts:
+            base_contacts = load_json(base_path)
+            base_contacts.extend(recovered_contacts)
+            save_json(base_path, base_contacts)
+            
+        if new_final_failed_contacts:
+            final_failed = load_json(final_failed_path)
+            final_failed.extend(new_final_failed_contacts)
+            save_json(final_failed_path, final_failed)
+            
+        print(f"[{datetime.now()}] 6:30 PM Job completed. Changes saved.")
 
 # Scheduler setup
 scheduler = BackgroundScheduler()
 # Run everyday at 18:00 (6:00 PM) for initial processing
-scheduler.add_job(func=lambda: do_process_contacts(is_retry=False), trigger="cron", hour=18, minute=0)
-# Run every 15 minutes to retry failed attempts (up to 3 times)
-scheduler.add_job(func=lambda: do_process_contacts(is_retry=True), trigger="interval", minutes=15)
+scheduler.add_job(func=process_new_contacts, trigger="cron", hour=18, minute=0)
+# Run everyday at 18:30 (6:30 PM) to retry failed attempts
+scheduler.add_job(func=process_failed_contacts, trigger="cron", hour=18, minute=30)
 scheduler.start()
 
 # Flask Routes
@@ -251,8 +321,8 @@ def trigger_batch():
         return jsonify({"success": False, "message": "Unauthorized"}), 403
 
     # Manual bypass to immediately process pending contacts
-    do_process_contacts(is_retry=False) # Run the 6 PM daily job logic
-    do_process_contacts(is_retry=True)  # Run the 15-min retry job logic
+    process_new_contacts() # Run the 6 PM daily job logic
+    process_failed_contacts()  # Run the 6:30 PM retry job logic
     return jsonify({"success": True, "message": "Batch processes triggered manually. Check terminal logs."}), 200
 
 if __name__ == '__main__':

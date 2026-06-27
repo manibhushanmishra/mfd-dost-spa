@@ -1,0 +1,16 @@
+# Local environments and secrets
+.env
+__pycache__/
+*.pyc
+
+# Local Data Storage
+data/
+
+# Virtual Environments
+venv/
+env/
+.venv/
+
+# OS generated files
+.DS_Store
+Thumbs.db

@@ -1,10 +1,10 @@
 # Local environments and secrets
 .env
+.env.local
 __pycache__/
 *.pyc
 
 # Local Data Storage
-data/
 
 # Virtual Environments
 venv/

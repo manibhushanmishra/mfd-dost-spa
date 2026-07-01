@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Ujjwal Kumar",
+        "email": "mfddost@gmail.com",
+        "mobile": "1234567890",
+        "business": "Alphabet INC.",
+        "message": "njhgfygh\nnkhgfsdfyuhjkl\njhvcwasdfghjqawsdfghjk",
+        "filename": "akamai-sde3-cover-letter.pdf",
+        "timestamp": "2026-06-28T22:15:08.804842",
+        "processed": true,
+        "retries": 0,
+        "admin_email_sent": true,
+        "user_email_sent": true,
+        "sms_sent": true
+    },
+    {
+        "name": "Ujjwal Kumar",
+        "email": "mfddost@gmaill.comm",
+        "mobile": "9135362747",
+        "business": "Alphabet INC.",
+        "message": "mnbfcdsdfgcvhbj\nbfasSzdxfghve4rtfgctykghmbfuykghmv\nbhydred",
+        "filename": "akamai-sde3-cover-letter.pdf",
+        "timestamp": "2026-06-28T22:16:41.040284",
+        "processed": true,
+        "retries": 0,
+        "admin_email_sent": true,
+        "user_email_sent": true,
+        "sms_sent": true
+    }
+]

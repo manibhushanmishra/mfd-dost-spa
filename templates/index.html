@@ -2401,12 +2401,16 @@
       const btnText = document.getElementById('form-btn-text');
       const btnIcon = document.getElementById('form-btn-icon');
 
+      const fileInput = document.getElementById('sample-content');
+      const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : "";
+
       const formData = {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
         mobile: document.getElementById('mobile').value,
         business: document.getElementById('business').value,
-        message: document.getElementById('message').value
+        message: document.getElementById('message').value,
+        filename: fileName
       };
 
       btnText.textContent = 'Sending...';

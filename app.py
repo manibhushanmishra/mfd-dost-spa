@@ -8,7 +8,15 @@ from flask import Flask, render_template, request, jsonify
 from dotenv import load_dotenv
 from apscheduler.schedulers.background import BackgroundScheduler
 
-load_dotenv()
+# First load the base .env file
+load_dotenv('.env')
+
+# Check if an ACTIVE_PROFILE was defined in the .env file (e.g., ACTIVE_PROFILE=local)
+active_profile = os.environ.get('ACTIVE_PROFILE')
+
+# If a profile is set, load its specific .env file and override base variables
+if active_profile:
+    load_dotenv(f'.env.{active_profile}', override=True)
 
 app = Flask(__name__)
 
@@ -27,8 +35,7 @@ TELEGRAM_USERNAME = os.environ.get("TELEGRAM_USERNAME", "Keenlearnerujjwal")
 DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
 
 def get_todays_file():
-    today = datetime.now().strftime('%Y_%m_%d')
-    return os.path.join(DATA_DIR, f'contacts_{today}.json')
+    return os.path.join(DATA_DIR, 'contacts.json')
 
 def get_contacts(filepath):
     if not os.path.exists(filepath):
@@ -48,6 +55,10 @@ def save_contact(contact_data):
     
     contact_data['timestamp'] = datetime.now().isoformat()
     contact_data['processed'] = False
+    contact_data['retries'] = 0
+    contact_data['admin_email_sent'] = False
+    contact_data['user_email_sent'] = False
+    contact_data['sms_sent'] = False
     
     contacts.append(contact_data)
     with open(filepath, 'w') as f:
@@ -75,11 +86,11 @@ def send_email(to_email, subject, body):
         return False, str(e)
 
 def get_file_paths():
-    today = datetime.now().strftime('%Y_%m_%d')
-    base = os.path.join(DATA_DIR, f'contacts_{today}.json')
-    failed = os.path.join(DATA_DIR, f'contacts_{today}_failed.json')
-    final_failed = os.path.join(DATA_DIR, f'final_failed_contacts_{today}.json')
-    return base, failed, final_failed
+    base = os.path.join(DATA_DIR, 'contacts.json')
+    success_path = os.path.join(DATA_DIR, 'contacts_success.json')
+    failed = os.path.join(DATA_DIR, 'contacts_failed.json')
+    final_failed = os.path.join(DATA_DIR, 'final_contacts_failed.json')
+    return base, success_path, failed, final_failed
 
 def load_json(filepath):
     if not os.path.exists(filepath):
@@ -156,25 +167,31 @@ def get_templates():
 
 def process_new_contacts():
     print(f"[{datetime.now()}] Running 6:00 PM Job: process_new_contacts")
-    base_path, failed_path, _ = get_file_paths()
+    stats = {"processed": 0, "success": 0, "failed": 0, "already_processed_moved": 0}
+    base_path, success_path, failed_path, _ = get_file_paths()
     contacts = load_json(base_path)
     if not contacts:
-        return
+        return stats
         
     admin_tpl, user_tpl = get_templates()
-    if not admin_tpl: return
+    if not admin_tpl: return stats
 
-    kept_contacts = []
+    processed_contact_ids = []
+    new_success_contacts = []
     new_failed_contacts = []
     changes_made = False
 
     for contact in contacts:
         if contact.get('processed'):
-            kept_contacts.append(contact)
+            new_success_contacts.append(contact)
+            processed_contact_ids.append(contact.get('timestamp'))
+            changes_made = True
+            stats["already_processed_moved"] += 1
             continue
             
         changes_made = True
         success = False
+        stats["processed"] += 1
         
         # Try up to 3 times synchronously
         for attempt in range(3):
@@ -183,49 +200,66 @@ def process_new_contacts():
                 break
                 
         if success:
-            # attempt starts at 0, so if it succeeds immediately, retry_count is 0
-            # attempt 1 -> retry_count 1
-            # attempt 2 -> retry_count 2
-            contact['retry_count'] = attempt
-            kept_contacts.append(contact)
+            contact['retries'] = attempt
+            new_success_contacts.append(contact)
+            stats["success"] += 1
         else:
-            # Failed 3 times (attempts 0, 1, 2)
-            contact['retry_count'] = 3
+            contact['retries'] = 3
             contact['last_error'] = "; ".join(errors)
             new_failed_contacts.append(contact)
+            stats["failed"] += 1
+            
+        processed_contact_ids.append(contact.get('timestamp'))
 
     if changes_made:
-        save_json(base_path, kept_contacts)
+        # Save successes
+        if new_success_contacts:
+            existing_success = load_json(success_path)
+            existing_success.extend(new_success_contacts)
+            save_json(success_path, existing_success)
+            
+        # Save failures
         if new_failed_contacts:
             existing_failed = load_json(failed_path)
             existing_failed.extend(new_failed_contacts)
             save_json(failed_path, existing_failed)
+            
+        # Remove processed from base
+        current_base = load_json(base_path)
+        remaining_base = [c for c in current_base if c.get('timestamp') not in processed_contact_ids]
+        save_json(base_path, remaining_base)
         print(f"[{datetime.now()}] 6:00 PM Job completed. Changes saved.")
+        
+    return stats
 
 def process_failed_contacts():
-    print(f"[{datetime.now()}] Running 6:30 PM Job: process_failed_contacts")
-    base_path, failed_path, final_failed_path = get_file_paths()
+    print(f"[{datetime.now()}] Running Job: process_failed_contacts")
+    stats = {"processed": 0, "success": 0, "failed": 0, "already_processed_moved": 0}
+    base_path, success_path, failed_path, final_failed_path = get_file_paths()
     failed_contacts = load_json(failed_path)
     
     if not failed_contacts:
-        return
+        return stats
         
     admin_tpl, user_tpl = get_templates()
-    if not admin_tpl: return
+    if not admin_tpl: return stats
 
-    kept_failed_contacts = []
-    recovered_contacts = []
+    processed_contact_ids = []
+    new_success_contacts = []
     new_final_failed_contacts = []
     changes_made = False
 
     for contact in failed_contacts:
         if contact.get('processed'):
-            recovered_contacts.append(contact)
+            new_success_contacts.append(contact)
+            processed_contact_ids.append(contact.get('timestamp'))
             changes_made = True
+            stats["already_processed_moved"] += 1
             continue
             
         changes_made = True
         success = False
+        stats["processed"] += 1
         
         # Try up to 3 times synchronously
         for attempt in range(3):
@@ -234,39 +268,50 @@ def process_failed_contacts():
                 break
                 
         if success:
-            # 1st attempt of 2nd job -> 4
-            # 2nd attempt of 2nd job -> 5
-            # 3rd attempt of 2nd job -> 6
-            contact['retry_count'] = 4 + attempt
-            recovered_contacts.append(contact)
+            contact['retries'] = 4 + attempt
+            new_success_contacts.append(contact)
+            stats["success"] += 1
         else:
-            # Failed all 3 times in 2nd job (6 total)
-            contact['retry_count'] = 6
+            contact['retries'] = 6
             contact['last_error'] = "; ".join(errors)
             new_final_failed_contacts.append(contact)
+            stats["failed"] += 1
+            
+        processed_contact_ids.append(contact.get('timestamp'))
 
     if changes_made:
-        # Clear out processed/failed contacts from the failed file
-        save_json(failed_path, kept_failed_contacts)
-        
-        if recovered_contacts:
-            base_contacts = load_json(base_path)
-            base_contacts.extend(recovered_contacts)
-            save_json(base_path, base_contacts)
+        # Save successes
+        if new_success_contacts:
+            existing_success = load_json(success_path)
+            existing_success.extend(new_success_contacts)
+            save_json(success_path, existing_success)
             
+        # Save final failures
         if new_final_failed_contacts:
-            final_failed = load_json(final_failed_path)
-            final_failed.extend(new_final_failed_contacts)
-            save_json(final_failed_path, final_failed)
-            
-        print(f"[{datetime.now()}] 6:30 PM Job completed. Changes saved.")
+            existing_final_failed = load_json(final_failed_path)
+            existing_final_failed.extend(new_final_failed_contacts)
+            save_json(final_failed_path, existing_final_failed)
+
+        # Remove processed from failed
+        current_failed = load_json(failed_path)
+        remaining_failed = [c for c in current_failed if c.get('timestamp') not in processed_contact_ids]
+        save_json(failed_path, remaining_failed)
+        print(f"[{datetime.now()}] Job completed. Changes saved.")
+        
+    return stats
 
 # Scheduler setup
 scheduler = BackgroundScheduler()
+
+def process_all_contacts():
+    print(f"[{datetime.now()}] Running 12:30 PM Job (All Contacts)")
+    process_new_contacts()
+    process_failed_contacts()
+
 # Run everyday at 18:00 (6:00 PM) for initial processing
 scheduler.add_job(func=process_new_contacts, trigger="cron", hour=18, minute=0)
-# Run everyday at 18:30 (6:30 PM) to retry failed attempts
-scheduler.add_job(func=process_failed_contacts, trigger="cron", hour=18, minute=30)
+# Run everyday at 12:30 PM to process both new and failed attempts
+scheduler.add_job(func=process_all_contacts, trigger="cron", hour=12, minute=30)
 scheduler.start()
 
 # Flask Routes
@@ -320,10 +365,37 @@ def trigger_batch():
     if not expected_token or token != expected_token:
         return jsonify({"success": False, "message": "Unauthorized"}), 403
 
-    # Manual bypass to immediately process pending contacts
-    process_new_contacts() # Run the 6 PM daily job logic
-    process_failed_contacts()  # Run the 6:30 PM retry job logic
-    return jsonify({"success": True, "message": "Batch processes triggered manually. Check terminal logs."}), 200
+    job_type = request.args.get('job')
+    
+    new_stats = {"processed": 0, "success": 0, "failed": 0, "already_processed_moved": 0}
+    failed_stats = {"processed": 0, "success": 0, "failed": 0, "already_processed_moved": 0}
+
+    if job_type == 'failed':
+        failed_stats = process_failed_contacts() or failed_stats
+    elif job_type == 'new':
+        new_stats = process_new_contacts() or new_stats
+    else:
+        # Default behavior: Run both
+        new_stats = process_new_contacts() or new_stats
+        failed_stats = process_failed_contacts() or failed_stats
+
+    total_processed = new_stats["processed"] + failed_stats["processed"]
+    total_success = new_stats["success"] + failed_stats["success"]
+    total_failed = new_stats["failed"] + failed_stats["failed"]
+    
+    if total_processed == 0 and new_stats["already_processed_moved"] == 0 and failed_stats["already_processed_moved"] == 0:
+        message = "No pending records to process."
+    else:
+        message = f"Batch completed. Processed {total_processed} records (Success: {total_success}, Failed: {total_failed})."
+        
+    return jsonify({
+        "success": True, 
+        "message": message,
+        "details": {
+            "new_contacts_job": new_stats,
+            "failed_contacts_job": failed_stats
+        }
+    }), 200
 
 if __name__ == '__main__':
     # When running with debug=True, the scheduler might start twice due to the reloader.

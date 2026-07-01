@@ -1,0 +1,15 @@
+[
+    {
+        "name": "Ujjwal Kumar",
+        "email": "mfddost@gmail.com",
+        "mobile": "9934160126",
+        "business": "Alphabet INC.",
+        "message": "nbjhgcfdxdsfgcvhjb\nvgfsrdfcghvjbknlm,nkyfdxzsrtry\n\\hgcewzxdfcgvhbnklkjhbkjgftrxzgfhjbk",
+        "filename": "akamai-sde3-cover-letter.pdf",
+        "timestamp": "2026-06-28T22:30:03.717160",
+        "processed": false,
+        "retries": 3,
+        "sms_sent": true,
+        "last_error": "Admin Email Failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\\n5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-2c7f6518bb1sm75352565ad.84 - gsmtp'); User Email Failed: (535, b'5.7.8 Username and Password not accepted. For more information, go to\\n5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-37fbce4a411sm2945426a91.3 - gsmtp')"
+    }
+]
